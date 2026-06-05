@@ -41,9 +41,7 @@
         }
 
         .nav-logo { font-size: 16px; font-weight: 600; color: var(--blue); letter-spacing: -0.3px; }
-
         .nav-links { display: flex; gap: 32px; list-style: none; }
-
         .nav-links a { font-size: 14px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover { color: var(--dark); }
 
@@ -114,27 +112,33 @@
         .about-text p { font-size: 15px; color: var(--gray); line-height: 1.9; margin-bottom: 16px; }
         .about-text p strong { color: var(--dark); }
 
+        .about-highlight {
+            background: var(--blue-light);
+            border-left: 3px solid var(--blue);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 16px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .about-highlight strong { color: var(--blue); }
+
         .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
         .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
         .stat-number { font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: -0.5px; }
         .stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
 
         .project-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; background: #fff; }
-
         .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transition: transform 0.3s; }
-
         .project-card:hover { border-color: var(--blue); box-shadow: 0 8px 30px rgba(37,99,235,0.1); transform: translateY(-4px); }
         .project-card:hover::before { transform: scaleX(1); }
 
         .project-icon { width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
-
         .project-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
         .project-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
 
@@ -146,19 +150,15 @@
         .project-link:hover { gap: 8px; }
 
         .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-
         .skill-group { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
         .skill-group-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
         .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
         .skill-item { font-size: 13px; color: var(--gray); background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
 
         .exp-list { display: flex; flex-direction: column; gap: 24px; }
-
         .exp-card { display: flex; gap: 20px; padding: 24px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
         .exp-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
-
         .exp-dot { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-
         .exp-role { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
         .exp-company { font-size: 14px; color: var(--blue); margin-bottom: 4px; font-weight: 500; }
         .exp-period { font-size: 13px; color: var(--gray); margin-bottom: 10px; }
@@ -169,7 +169,6 @@
         .contact-inner p { color: #94a3b8; font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
         .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-
         .contact-btn { padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
         .contact-btn-primary { background: var(--blue); color: #fff; }
         .contact-btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
@@ -213,8 +212,8 @@
             <p class="hero-sub">Cybersecurity Engineer × Fintech Builder</p>
             <p class="hero-desc">
                 I build financial tools at the intersection of security and data.
-                Currently in my final year of B.Tech Cybersecurity at Presidency University, Bengaluru —
-                focused on fintech, risk analysis, and fraud detection.
+                Final year B.Tech Cybersecurity at Presidency University, Bengaluru —
+                focused on fintech, risk analysis, fraud detection, and product thinking.
             </p>
             <div class="hero-btns">
                 <a href="#projects" class="btn-primary">View My Projects</a>
@@ -233,9 +232,20 @@
     <div class="section-divider"></div>
     <div class="about-grid">
         <div class="about-text">
-            <p>I started my engineering journey in <strong>cybersecurity</strong> — learning how systems get attacked, defended, and broken. Halfway through, I got genuinely interested in <strong>how money moves</strong>. How payments work. How risk is measured. How fraud happens at scale.</p>
-            <p>That curiosity turned into self-directed study — I spent months learning about UPI architecture, payment flows, financial risk models, and product thinking in fintech. Then I started building things to prove I understood them.</p>
-            <p>I'm now focused on combining my <strong>engineering background</strong> with <strong>finance and data skills</strong> to work in fintech — specifically in roles around risk, fraud, and financial data analysis.</p>
+            <p>
+                I started in <strong>cybersecurity</strong> — learning how systems get attacked, defended, and broken.
+                Halfway through, I got genuinely curious about <strong>how money moves</strong>.
+                How payments work. How risk is measured. How fraud happens at scale.
+            </p>
+            <p>
+                That curiosity turned into serious self-study. I went deep into
+                <strong>UPI architecture</strong> — transaction flows, P2P vs P2M dynamics,
+                failure states, monetization models, and product decisions around reliability.
+                I didn't just read about it. I started thinking about it like someone who builds and ships products.
+            </p>
+            <div class="about-highlight">
+                <strong>What I'm looking for:</strong> Fintech analyst, data analyst, or product-adjacent roles at early stage startups — where engineering background meets financial thinking.
+            </div>
         </div>
         <div class="about-stats">
             <div class="stat-card">
@@ -266,7 +276,11 @@
         <div class="project-card">
             <div class="project-icon">📈</div>
             <div class="project-name">RiskLens</div>
-            <div class="project-desc">A web app that analyzes stock portfolio risk using real market data. Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility, and correlation heatmap across Indian and US stocks.</div>
+            <div class="project-desc">
+                A web app that analyzes stock portfolio risk using real market data.
+                Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility,
+                and correlation heatmap across Indian and US stocks.
+            </div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">Flask</span>
@@ -283,7 +297,11 @@
         <div class="project-card">
             <div class="project-icon">🛡️</div>
             <div class="project-name">FraudShield</div>
-            <div class="project-desc">A machine learning system that detects fraudulent credit card transactions in real time. Trained on 284,807 real transactions using Random Forest and SMOTE to handle extreme class imbalance.</div>
+            <div class="project-desc">
+                A machine learning system that detects fraudulent credit card transactions
+                in real time. Trained on 284,807 real transactions using Random Forest
+                and SMOTE to handle extreme class imbalance.
+            </div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">scikit-learn</span>
@@ -300,7 +318,11 @@
         <div class="project-card">
             <div class="project-icon">🌐</div>
             <div class="project-name">Freelance Web Development</div>
-            <div class="project-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp-based checkout integration, a resort with full business web presence, and a manufacturing factory showcase site.</div>
+            <div class="project-desc">
+                Built and deployed websites for three paying clients — a boutique fashion
+                store with WhatsApp-based checkout integration, a resort with full business
+                web presence, and a manufacturing factory showcase site.
+            </div>
             <div class="project-tags">
                 <span class="tag">HTML/CSS</span>
                 <span class="tag">JavaScript</span>
@@ -349,6 +371,7 @@
                 <span class="skill-item">Sharpe Ratio</span>
                 <span class="skill-item">UPI Architecture</span>
                 <span class="skill-item">Fraud Detection</span>
+                <span class="skill-item">P2P / P2M</span>
             </div>
         </div>
         <div class="skill-group">
@@ -378,6 +401,7 @@
                 <span class="skill-item">Machine Learning</span>
                 <span class="skill-item">Data Analysis</span>
                 <span class="skill-item">Product Thinking</span>
+                <span class="skill-item">Payment Systems</span>
             </div>
         </div>
     </div>
@@ -412,7 +436,7 @@
                 <div class="exp-role">Freelance Web Developer</div>
                 <div class="exp-company">Independent</div>
                 <div class="exp-period">2024 — Present</div>
-                <div class="exp-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp checkout integration, a resort with full business web presence, and a manufacturing factory showcase site. Handled end-to-end development from design to deployment.</div>
+                <div class="exp-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp checkout integration, a resort with full business web presence, and a manufacturing factory showcase site. End-to-end development from design to deployment.</div>
             </div>
         </div>
     </div>
@@ -421,7 +445,7 @@
 <section id="contact">
     <div class="contact-inner">
         <h2>Let's Work Together</h2>
-        <p>I'm actively looking for fintech internships. If you're building something interesting in payments, risk, or fraud — I'd love to talk.</p>
+        <p>I'm actively looking for fintech internships. If you're building something in payments, risk, fraud, or financial data — I'd genuinely love to talk.</p>
         <div class="contact-links">
             <a href="mailto:abhinavharisri@gmail.com" class="contact-btn contact-btn-primary">abhinavharisri@gmail.com</a>
             <a href="https://www.linkedin.com/in/abhinav-h-897152250/" target="_blank" class="contact-btn contact-btn-secondary">LinkedIn →</a>
