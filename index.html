@@ -25,7 +25,6 @@
             line-height: 1.6;
         }
 
-        /* NAV */
         nav {
             position: fixed;
             top: 0;
@@ -41,29 +40,13 @@
             justify-content: space-between;
         }
 
-        .nav-logo {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--blue);
-            letter-spacing: -0.3px;
-        }
+        .nav-logo { font-size: 16px; font-weight: 600; color: var(--blue); letter-spacing: -0.3px; }
 
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
 
-        .nav-links a {
-            font-size: 14px;
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
+        .nav-links a { font-size: 14px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover { color: var(--dark); }
 
-        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -95,86 +78,22 @@
             50% { opacity: 0.3; }
         }
 
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 8px;
-            color: var(--dark);
-        }
+        .hero h1 { font-size: 52px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 8px; }
+        .hero h1 .typed { color: var(--blue); }
+        .hero-sub { font-size: 20px; color: var(--gray); margin-bottom: 20px; font-weight: 400; }
+        .hero-desc { font-size: 16px; color: var(--gray); max-width: 560px; margin-bottom: 36px; line-height: 1.8; }
 
-        .hero h1 .typed {
-            color: var(--blue);
-        }
+        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
-        .hero-sub {
-            font-size: 20px;
-            color: var(--gray);
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        .hero-desc {
-            font-size: 16px;
-            color: var(--gray);
-            max-width: 560px;
-            margin-bottom: 36px;
-            line-height: 1.8;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            padding: 12px 24px;
-            background: var(--blue);
-            color: #fff;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
+        .btn-primary { padding: 12px 24px; background: var(--blue); color: #fff; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
         .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
 
-        .btn-secondary {
-            padding: 12px 24px;
-            background: transparent;
-            color: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
+        .btn-secondary { padding: 12px 24px; background: transparent; color: var(--dark); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
         .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
 
-        .hero-scroll {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            color: var(--gray);
-            font-size: 12px;
-        }
+        .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--gray); font-size: 12px; }
 
-        .scroll-line {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, var(--border), transparent);
-            animation: scrollDown 1.5s infinite;
-        }
+        .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--border), transparent); animation: scrollDown 1.5s infinite; }
 
         @keyframes scrollDown {
             0% { transform: scaleY(0); transform-origin: top; }
@@ -183,358 +102,86 @@
             100% { transform: scaleY(0); transform-origin: bottom; }
         }
 
-        /* SECTIONS */
-        section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
+        section { max-width: 1000px; margin: 0 auto; padding: 80px 40px; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .section-label { font-size: 12px; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+        .section-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; }
+        .section-divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin-bottom: 40px; }
 
-        .section-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--blue);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
-        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
-        }
-
-        .section-divider {
-            width: 40px;
-            height: 3px;
-            background: var(--blue);
-            border-radius: 2px;
-            margin-bottom: 40px;
-        }
-
-        /* ABOUT */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .about-text p {
-            font-size: 15px;
-            color: var(--gray);
-            line-height: 1.9;
-            margin-bottom: 16px;
-        }
-
+        .about-text p { font-size: 15px; color: var(--gray); line-height: 1.9; margin-bottom: 16px; }
         .about-text p strong { color: var(--dark); }
 
-        .about-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
+        .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-        .stat-card {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-        }
+        .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .stat-number { font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: -0.5px; }
+        .stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; }
 
-        .stat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--blue);
-            letter-spacing: -0.5px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--gray);
-            margin-top: 4px;
-        }
-
-        /* PROJECTS */
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
 
-        .project-card {
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-        }
+        .project-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; background: #fff; }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--blue);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
+        .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transition: transform 0.3s; }
 
-        .project-card:hover {
-            border-color: var(--blue);
-            box-shadow: 0 8px 30px rgba(37,99,235,0.1);
-            transform: translateY(-4px);
-        }
-
+        .project-card:hover { border-color: var(--blue); box-shadow: 0 8px 30px rgba(37,99,235,0.1); transform: translateY(-4px); }
         .project-card:hover::before { transform: scaleX(1); }
 
-        .project-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--blue-light);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 16px;
-        }
+        .project-icon { width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
 
-        .project-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--dark);
-        }
+        .project-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
+        .project-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
 
-        .project-desc {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .tag { font-size: 12px; padding: 4px 10px; background: var(--blue-light); color: var(--blue); border-radius: 20px; font-weight: 500; }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .tag {
-            font-size: 12px;
-            padding: 4px 10px;
-            background: var(--blue-light);
-            color: var(--blue);
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 12px;
-        }
-
-        .project-link {
-            font-size: 13px;
-            color: var(--blue);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: gap 0.2s;
-        }
-
+        .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .project-link { font-size: 13px; color: var(--blue); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
         .project-link:hover { gap: 8px; }
 
-        /* SKILLS */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-        .skill-group {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-        }
+        .skill-group { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .skill-group-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-item { font-size: 13px; color: var(--gray); background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
 
-        .skill-group-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .skill-item {
-            font-size: 13px;
-            color: var(--gray);
-            background: #fff;
-            border: 1px solid var(--border);
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-
-        /* EXPERIENCE */
         .exp-list { display: flex; flex-direction: column; gap: 24px; }
 
-        .exp-card {
-            display: flex;
-            gap: 20px;
-            padding: 24px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
+        .exp-card { display: flex; gap: 20px; padding: 24px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
+        .exp-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
 
-        .exp-card:hover {
-            border-color: var(--blue);
-            box-shadow: 0 4px 20px rgba(37,99,235,0.08);
-        }
+        .exp-dot { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
 
-        .exp-dot {
-            width: 40px;
-            height: 40px;
-            background: var(--blue-light);
-            border-radius: 10px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
+        .exp-role { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+        .exp-company { font-size: 14px; color: var(--blue); margin-bottom: 4px; font-weight: 500; }
+        .exp-period { font-size: 13px; color: var(--gray); margin-bottom: 10px; }
+        .exp-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
 
-        .exp-role {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 2px;
-        }
+        .contact-inner { background: var(--dark); border-radius: 20px; padding: 60px; text-align: center; color: #fff; }
+        .contact-inner h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .contact-inner p { color: #94a3b8; font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
-        .exp-company {
-            font-size: 14px;
-            color: var(--blue);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
+        .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 
-        .exp-period {
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 10px;
-        }
-
-        .exp-desc {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.7;
-        }
-
-        /* CONTACT */
-        .contact-inner {
-            background: var(--dark);
-            border-radius: 20px;
-            padding: 60px;
-            text-align: center;
-            color: #fff;
-        }
-
-        .contact-inner h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .contact-inner p {
-            color: #94a3b8;
-            font-size: 16px;
-            margin-bottom: 32px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .contact-btn-primary {
-            background: var(--blue);
-            color: #fff;
-        }
-
+        .contact-btn { padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+        .contact-btn-primary { background: var(--blue); color: #fff; }
         .contact-btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
-
-        .contact-btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
+        .contact-btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
         .contact-btn-secondary:hover { background: rgba(255,255,255,0.2); }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 24px;
-            font-size: 13px;
-            color: var(--gray);
-            border-top: 1px solid var(--border);
-        }
-
-        /* SCROLL ANIMATIONS */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        footer { text-align: center; padding: 24px; font-size: 13px; color: var(--gray); border-top: 1px solid var(--border); }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
-            .about-grid, .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
             nav { padding: 0 20px; }
             .nav-links { gap: 16px; }
             section { padding: 60px 20px; }
@@ -544,7 +191,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
     <div class="nav-logo">Abhinav Harisri</div>
     <ul class="nav-links">
@@ -556,7 +202,6 @@
     </ul>
 </nav>
 
-<!-- HERO -->
 <div style="position:relative;">
     <div class="hero">
         <div class="hero-content">
@@ -582,32 +227,19 @@
     </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
     <div class="section-label">About Me</div>
     <div class="section-title">The Story So Far</div>
     <div class="section-divider"></div>
     <div class="about-grid">
         <div class="about-text">
-            <p>
-                I started my engineering journey in <strong>cybersecurity</strong> — learning how systems get attacked,
-                defended, and broken. Halfway through, I got genuinely interested in <strong>how money moves</strong>.
-                How payments work. How risk is measured. How fraud happens at scale.
-            </p>
-            <p>
-                That curiosity turned into self-directed study — I spent months learning about UPI architecture,
-                payment flows, financial risk models, and product thinking in fintech.
-                Then I started building things to prove I understood them.
-            </p>
-            <p>
-                I'm now focused on combining my <strong>engineering background</strong> with
-                <strong>finance and data skills</strong> to work in fintech — specifically in roles
-                around risk, fraud, and financial data analysis.
-            </p>
+            <p>I started my engineering journey in <strong>cybersecurity</strong> — learning how systems get attacked, defended, and broken. Halfway through, I got genuinely interested in <strong>how money moves</strong>. How payments work. How risk is measured. How fraud happens at scale.</p>
+            <p>That curiosity turned into self-directed study — I spent months learning about UPI architecture, payment flows, financial risk models, and product thinking in fintech. Then I started building things to prove I understood them.</p>
+            <p>I'm now focused on combining my <strong>engineering background</strong> with <strong>finance and data skills</strong> to work in fintech — specifically in roles around risk, fraud, and financial data analysis.</p>
         </div>
         <div class="about-stats">
             <div class="stat-card">
-                <div class="stat-number">2</div>
+                <div class="stat-number">3</div>
                 <div class="stat-label">Live deployed projects</div>
             </div>
             <div class="stat-card">
@@ -619,14 +251,13 @@
                 <div class="stat-label">Transactions analyzed</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">99.7%</div>
-                <div class="stat-label">ML model accuracy</div>
+                <div class="stat-number">3</div>
+                <div class="stat-label">Freelance clients served</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
     <div class="section-label">Projects</div>
     <div class="section-title">Things I've Built</div>
@@ -635,11 +266,7 @@
         <div class="project-card">
             <div class="project-icon">📈</div>
             <div class="project-name">RiskLens</div>
-            <div class="project-desc">
-                A web app that analyzes stock portfolio risk using real market data.
-                Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility,
-                and correlation heatmap across Indian and US stocks.
-            </div>
+            <div class="project-desc">A web app that analyzes stock portfolio risk using real market data. Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility, and correlation heatmap across Indian and US stocks.</div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">Flask</span>
@@ -656,11 +283,7 @@
         <div class="project-card">
             <div class="project-icon">🛡️</div>
             <div class="project-name">FraudShield</div>
-            <div class="project-desc">
-                A machine learning system that detects fraudulent credit card transactions
-                in real time. Trained on 284,807 real transactions using Random Forest
-                and SMOTE to handle extreme class imbalance.
-            </div>
+            <div class="project-desc">A machine learning system that detects fraudulent credit card transactions in real time. Trained on 284,807 real transactions using Random Forest and SMOTE to handle extreme class imbalance.</div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">scikit-learn</span>
@@ -673,10 +296,26 @@
                 <a href="https://github.com/hotpot-69/fraud-detection" target="_blank" class="project-link">GitHub →</a>
             </div>
         </div>
+
+        <div class="project-card">
+            <div class="project-icon">🌐</div>
+            <div class="project-name">Freelance Web Development</div>
+            <div class="project-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp-based checkout integration, a resort with full business web presence, and a manufacturing factory showcase site.</div>
+            <div class="project-tags">
+                <span class="tag">HTML/CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">Vercel</span>
+                <span class="tag">Client Work</span>
+                <span class="tag">E-commerce</span>
+            </div>
+            <div class="project-links">
+                <a href="https://www.thamaraidesigners.com/" target="_blank" class="project-link">Thamarai Designers →</a>
+                <a href="https://mandarin-navy.vercel.app/" target="_blank" class="project-link">Mandarin Resort →</a>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
     <div class="section-label">Skills</div>
     <div class="section-title">What I Work With</div>
@@ -729,7 +368,7 @@
                 <span class="skill-item">GitHub</span>
                 <span class="skill-item">VS Code</span>
                 <span class="skill-item">Render</span>
-                <span class="skill-item">Linux</span>
+                <span class="skill-item">Vercel</span>
             </div>
         </div>
         <div class="skill-group">
@@ -744,7 +383,6 @@
     </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section id="experience">
     <div class="section-label">Experience</div>
     <div class="section-title">Where I've Worked</div>
@@ -756,10 +394,7 @@
                 <div class="exp-role">Marketing, Fundraising & Partnerships Intern</div>
                 <div class="exp-company">STREET</div>
                 <div class="exp-period">Jul 2025 — Oct 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">
-                    Assisted in identifying potential investors and strategic partners.
-                    Conducted investor research and assisted in building the fundraising pipeline.
-                </div>
+                <div class="exp-desc">Assisted in identifying potential investors and strategic partners. Conducted investor research and assisted in building the fundraising pipeline.</div>
             </div>
         </div>
         <div class="exp-card">
@@ -768,16 +403,21 @@
                 <div class="exp-role">Finance Accounting Intern</div>
                 <div class="exp-company">Superior Electric Machines Pvt Ltd</div>
                 <div class="exp-period">Mar 2025 — Jun 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">
-                    Maintained and updated financial records, journal entries, ledgers and invoices.
-                    Prepared and reviewed monthly financial statements and cash flow reports.
-                </div>
+                <div class="exp-desc">Maintained and updated financial records, journal entries, ledgers and invoices. Prepared and reviewed monthly financial statements and cash flow reports.</div>
+            </div>
+        </div>
+        <div class="exp-card">
+            <div class="exp-dot">💻</div>
+            <div>
+                <div class="exp-role">Freelance Web Developer</div>
+                <div class="exp-company">Independent</div>
+                <div class="exp-period">2024 — Present</div>
+                <div class="exp-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp checkout integration, a resort with full business web presence, and a manufacturing factory showcase site. Handled end-to-end development from design to deployment.</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
     <div class="contact-inner">
         <h2>Let's Work Together</h2>
@@ -795,7 +435,6 @@
 </footer>
 
 <script>
-    // Typed effect
     const name = "Abhinav.";
     let i = 0;
     const el = document.getElementById('typed-name');
@@ -808,7 +447,6 @@
     }
     setTimeout(type, 500);
 
-    // Scroll animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
