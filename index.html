@@ -149,6 +149,21 @@
         .project-link { font-size: 13px; color: var(--blue); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
         .project-link:hover { gap: 8px; }
 
+        .finance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+        .finance-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; background: #fff; }
+        .finance-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #10b981; transform: scaleX(0); transition: transform 0.3s; }
+        .finance-card:hover { border-color: #10b981; box-shadow: 0 8px 30px rgba(16,185,129,0.1); transform: translateY(-4px); }
+        .finance-card:hover::before { transform: scaleX(1); }
+
+        .finance-icon { width: 44px; height: 44px; background: #f0fdf4; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
+        .finance-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
+        .finance-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+        .finance-tag { font-size: 12px; padding: 4px 10px; background: #f0fdf4; color: #10b981; border-radius: 20px; font-weight: 500; }
+        .finance-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .finance-link { font-size: 13px; color: #10b981; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+        .finance-link:hover { gap: 8px; }
+
         .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .skill-group { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
         .skill-group-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -195,6 +210,7 @@
     <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#finance">Finance Work</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -211,9 +227,8 @@
             <h1>Hi, I'm <span class="typed" id="typed-name"></span></h1>
             <p class="hero-sub">I build financial tools. I understand security. I'm looking for where both matter.</p>
             <p class="hero-desc">
-                I build financial tools at the intersection of security and data.
                 Final year B.Tech Cybersecurity at Presidency University, Bengaluru —
-                focused on fintech, risk analysis, fraud detection, and product thinking.
+                focused on fintech, financial risk, and fraud detection.
             </p>
             <div class="hero-btns">
                 <a href="#projects" class="btn-primary">View My Projects</a>
@@ -232,17 +247,8 @@
     <div class="section-divider"></div>
     <div class="about-grid">
         <div class="about-text">
-            <p>
-                I started in <strong>cybersecurity</strong> — learning how systems get attacked, defended, and broken.
-                Halfway through, I got genuinely curious about <strong>how money moves</strong>.
-                How payments work. How risk is measured. How fraud happens at scale.
-            </p>
-            <p>
-                That curiosity turned into serious self-study. I went deep into
-                <strong>UPI architecture</strong> — transaction flows, P2P vs P2M dynamics,
-                failure states, monetization models, and product decisions around reliability.
-                I didn't just read about it. I started thinking about it like someone who builds and ships products.
-            </p>
+            <p>Found my interest in finance halfway through a cybersecurity degree. Never looked back.</p>
+            <p>Spent the last year understanding how money moves, how systems protect it, and how fraud happens at scale. My niche is financial risk and the systems behind it.</p>
             <div class="about-highlight">
                 <strong>What I'm looking for:</strong> Fintech analyst, data analyst, or product-adjacent roles at early stage startups — where engineering background meets financial thinking.
             </div>
@@ -276,11 +282,7 @@
         <div class="project-card">
             <div class="project-icon">📈</div>
             <div class="project-name">RiskLens</div>
-            <div class="project-desc">
-                A web app that analyzes stock portfolio risk using real market data.
-                Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility,
-                and correlation heatmap across Indian and US stocks.
-            </div>
+            <div class="project-desc">A web app that analyzes stock portfolio risk using real market data. Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility, and correlation heatmap across Indian and US stocks.</div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">Flask</span>
@@ -297,11 +299,7 @@
         <div class="project-card">
             <div class="project-icon">🛡️</div>
             <div class="project-name">FraudShield</div>
-            <div class="project-desc">
-                A machine learning system that detects fraudulent credit card transactions
-                in real time. Trained on 284,807 real transactions using Random Forest
-                and SMOTE to handle extreme class imbalance.
-            </div>
+            <div class="project-desc">A machine learning system that detects fraudulent credit card transactions in real time. Trained on 284,807 real transactions using Random Forest and SMOTE to handle extreme class imbalance.</div>
             <div class="project-tags">
                 <span class="tag">Python</span>
                 <span class="tag">scikit-learn</span>
@@ -318,21 +316,37 @@
         <div class="project-card">
             <div class="project-icon">🌐</div>
             <div class="project-name">Freelance Web Development</div>
-            <div class="project-desc">
-                Built and deployed websites for three paying clients — a boutique fashion
-                store with WhatsApp-based checkout integration, a resort with full business
-                web presence, and a manufacturing factory showcase site.
-            </div>
+            <div class="project-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp-based checkout integration, a resort with full business web presence, and a manufacturing factory showcase site.</div>
             <div class="project-tags">
                 <span class="tag">HTML/CSS</span>
                 <span class="tag">JavaScript</span>
                 <span class="tag">Vercel</span>
                 <span class="tag">Client Work</span>
-                <span class="tag">E-commerce</span>
             </div>
             <div class="project-links">
                 <a href="https://www.thamaraidesigners.com/" target="_blank" class="project-link">Thamarai Designers →</a>
                 <a href="https://mandarin-navy.vercel.app/" target="_blank" class="project-link">Mandarin Resort →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="finance">
+    <div class="section-label">Finance Work</div>
+    <div class="section-title">Market Analysis & Research</div>
+    <div class="section-divider"></div>
+    <div class="finance-grid">
+        <div class="finance-card">
+            <div class="finance-icon">📊</div>
+            <div class="finance-name">Stock Buy/Sell Tracker</div>
+            <div class="finance-desc">Personal stock tracker analyzing 7 companies across Indian and US markets. Each stock rated Buy/Sell/Hold based on fundamental analysis — revenue growth, valuation multiples, market position, and macro tailwinds. Portfolio bias: Bullish (5 Buys, 1 Hold, 1 Sell).</div>
+            <div class="finance-tags">
+                <span class="finance-tag">Fundamental Analysis</span>
+                <span class="finance-tag">Equity Research</span>
+                <span class="finance-tag">Excel</span>
+            </div>
+            <div class="project-links">
+                <a href="abhinavstocktrackerjune.pdf" target="_blank" class="finance-link">View Tracker →</a>
             </div>
         </div>
     </div>
@@ -372,6 +386,7 @@
                 <span class="skill-item">UPI Architecture</span>
                 <span class="skill-item">Fraud Detection</span>
                 <span class="skill-item">P2P / P2M</span>
+                <span class="skill-item">Equity Research</span>
             </div>
         </div>
         <div class="skill-group">
@@ -389,6 +404,7 @@
             <div class="skill-list">
                 <span class="skill-item">Git</span>
                 <span class="skill-item">GitHub</span>
+                <span class="skill-item">Excel</span>
                 <span class="skill-item">VS Code</span>
                 <span class="skill-item">Render</span>
                 <span class="skill-item">Vercel</span>
@@ -415,10 +431,10 @@
         <div class="exp-card">
             <div class="exp-dot">🚀</div>
             <div>
-                <div class="exp-role">Marketing, Fundraising & Partnerships Intern</div>
-                <div class="exp-company">STREET</div>
+                <div class="exp-role">Fundraising & Partnerships Intern</div>
+                <div class="exp-company">Streetplay.ai</div>
                 <div class="exp-period">Jul 2025 — Oct 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">Assisted in identifying potential investors and strategic partners. Conducted investor research and assisted in building the fundraising pipeline.</div>
+                <div class="exp-desc">Identified and connected with 20+ early-stage investors in the US focused on Sports Tech and AI. Refined pitch deck and fundraising narrative; built partnerships with football turfs and academies.</div>
             </div>
         </div>
         <div class="exp-card">
@@ -427,16 +443,16 @@
                 <div class="exp-role">Finance Accounting Intern</div>
                 <div class="exp-company">Superior Electric Machines Pvt Ltd</div>
                 <div class="exp-period">Mar 2025 — Jun 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">Maintained and updated financial records, journal entries, ledgers and invoices. Prepared and reviewed monthly financial statements and cash flow reports.</div>
+                <div class="exp-desc">Prepared monthly financial statements for a manufacturing firm. Assisted with audit readiness and cost management.</div>
             </div>
         </div>
         <div class="exp-card">
             <div class="exp-dot">💻</div>
             <div>
                 <div class="exp-role">Freelance Web Developer</div>
-                <div class="exp-company">Independent</div>
-                <div class="exp-period">2024 — Present</div>
-                <div class="exp-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp checkout integration, a resort with full business web presence, and a manufacturing factory showcase site. End-to-end development from design to deployment.</div>
+                <div class="exp-company">Independent Clients</div>
+                <div class="exp-period">2024 — Present · Bengaluru</div>
+                <div class="exp-desc">Built and deployed websites for three paying clients — boutique fashion store with WhatsApp checkout integration, resort with full business web presence, and manufacturing factory showcase site.</div>
             </div>
         </div>
     </div>
