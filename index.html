@@ -1,432 +1,576 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhinav Harisri — Fintech & Cybersecurity</title>
+    <title>Abhinav Harisri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --blue: #2563eb;
-            --blue-light: #eff6ff;
-            --dark: #0f172a;
-            --gray: #64748b;
-            --light: #f8fafc;
-            --border: #e2e8f0;
+            --blue: #2563EB;
+            --blue-light: #EFF6FF;
+            --blue-mid: #DBEAFE;
+            --yellow: #F59E0B;
+            --green: #10B981;
+            --dark: #111827;
+            --gray: #6B7280;
+            --gray-light: #F9FAFB;
+            --border: #E5E7EB;
+            --white: #FFFFFF;
         }
+
+        * { cursor: none; }
+
+        .cursor-dot {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: background 0.25s ease, width 0.25s ease, height 0.25s ease;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--blue);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            opacity: 0.35;
+            transition: width 0.35s ease, height 0.35s ease, border-color 0.35s ease, opacity 0.35s ease;
+        }
+
+        .cursor-dot.hover { background: var(--yellow); width: 8px; height: 8px; }
+        .cursor-ring.hover { width: 52px; height: 52px; border-color: var(--yellow); opacity: 0.65; }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #fff;
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* NAV */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
             z-index: 100;
             padding: 0 40px;
-            height: 60px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .nav-logo { font-size: 16px; font-weight: 600; color: var(--blue); letter-spacing: -0.3px; }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a { font-size: 14px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+        .nav-left { display: flex; align-items: center; gap: 12px; }
+
+        .nav-logo { font-size: 15px; font-weight: 600; color: var(--dark); text-decoration: none; }
+
+        .nav-badge {
+            font-size: 11px; font-weight: 500;
+            background: var(--blue-light); color: var(--blue);
+            padding: 2px 8px; border-radius: 99px;
+            border: 1px solid var(--blue-mid);
+        }
+
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+
+        .nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
         .nav-links a:hover { color: var(--dark); }
 
+        .nav-clock {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--gray);
+            background: var(--gray-light);
+            padding: 4px 10px; border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        /* HERO */
         .hero {
             min-height: 100vh;
+            padding: 100px 40px 80px;
             display: flex;
             align-items: center;
-            padding: 80px 40px 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content { max-width: 680px; }
+        .hero-bg-text {
+            position: absolute;
+            right: -10px; top: 50%;
+            transform: translateY(-50%);
+            font-size: clamp(120px, 18vw, 220px);
+            font-weight: 700;
+            color: var(--blue-light);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
 
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--blue-light);
-            color: var(--blue);
-            font-size: 13px;
-            padding: 6px 14px;
-            border-radius: 20px;
+        .hero-content { max-width: 680px; position: relative; z-index: 1; }
+
+        .hero-name {
+            font-size: clamp(44px, 7vw, 82px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gray);
             margin-bottom: 24px;
-            font-weight: 500;
         }
 
-        .hero-tag span { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; animation: pulse 2s infinite; }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+        .hero-tagline {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            color: var(--gray);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            max-width: 520px;
         }
 
-        .hero h1 { font-size: 52px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 8px; }
-        .hero h1 .typed { color: var(--blue); }
-        .hero-sub { font-size: 20px; color: var(--gray); margin-bottom: 20px; font-weight: 400; }
-        .hero-desc { font-size: 16px; color: var(--gray); max-width: 560px; margin-bottom: 36px; line-height: 1.8; }
-
-        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-
-        .btn-primary { padding: 12px 24px; background: var(--blue); color: #fff; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
-        .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
-
-        .btn-secondary { padding: 12px 24px; background: transparent; color: var(--dark); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
-        .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-
-        .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--gray); font-size: 12px; }
-
-        .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--border), transparent); animation: scrollDown 1.5s infinite; }
-
-        @keyframes scrollDown {
-            0% { transform: scaleY(0); transform-origin: top; }
-            50% { transform: scaleY(1); transform-origin: top; }
-            51% { transform: scaleY(1); transform-origin: bottom; }
-            100% { transform: scaleY(0); transform-origin: bottom; }
+        .hero-niche {
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 36px;
+            font-style: italic;
         }
 
-        section { max-width: 1000px; margin: 0 auto; padding: 80px 40px; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+
+        .btn-primary {
+            padding: 11px 24px; background: var(--blue); color: var(--white);
+            border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500;
+            transition: all 0.2s; border: 1.5px solid var(--blue);
+        }
+        .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; transform: translateY(-1px); }
+
+        .btn-secondary {
+            padding: 11px 24px; background: transparent; color: var(--dark);
+            border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500;
+            transition: all 0.2s; border: 1.5px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--dark); transform: translateY(-1px); }
+
+        .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+
+        .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+
+        .hero-stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px; font-weight: 500; color: var(--dark);
+        }
+        .hero-stat-num .accent { color: var(--blue); }
+        .hero-stat-label { font-size: 11px; color: var(--gray); }
+
+        .hero-clock-strip {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 12px 40px;
+            background: var(--gray-light);
+            border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .hero-clock-left { display: flex; align-items: center; gap: 16px; }
+        .hero-clock-label { font-size: 11px; color: var(--gray); font-weight: 500; }
+        .hero-clock-time { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: var(--dark); }
+        .hero-clock-date { font-size: 12px; color: var(--gray); }
+
+        /* SECTIONS */
+        section {
+            padding: 80px 40px;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
         section.visible { opacity: 1; transform: translateY(0); }
 
-        .section-label { font-size: 12px; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-        .section-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; }
-        .section-divider { width: 40px; height: 3px; background: var(--blue); border-radius: 2px; margin-bottom: 40px; }
-
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-
-        .about-text p { font-size: 15px; color: var(--gray); line-height: 1.9; margin-bottom: 16px; }
-        .about-text p strong { color: var(--dark); }
-
-        .about-highlight {
-            background: var(--blue-light);
-            border-left: 3px solid var(--blue);
-            border-radius: 0 8px 8px 0;
-            padding: 14px 16px;
-            margin-top: 8px;
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.7;
+        .section-eyebrow { margin-bottom: 8px; }
+        .section-tag {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--blue);
+            background: var(--blue-light); padding: 3px 10px; border-radius: 99px;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -0.02em; color: var(--dark); margin-bottom: 40px;
         }
 
-        .about-highlight strong { color: var(--blue); }
+        /* ABOUT */
+        #about { background: var(--gray-light); }
 
-        .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: start; max-width: 1000px; }
 
-        .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        .stat-number { font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: -0.5px; }
-        .stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; }
+        .about-text { font-size: 15px; color: var(--gray); line-height: 1.9; margin-bottom: 16px; }
+        .about-text strong { color: var(--dark); font-weight: 600; }
 
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .about-callout {
+            background: var(--blue-light); border: 1px solid var(--blue-mid);
+            border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0;
+            padding: 16px 20px; margin-top: 24px;
+            font-size: 14px; color: var(--gray); line-height: 1.7;
+        }
+        .about-callout strong { color: var(--blue); }
 
-        .project-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; background: #fff; }
-        .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transition: transform 0.3s; }
-        .project-card:hover { border-color: var(--blue); box-shadow: 0 8px 30px rgba(37,99,235,0.1); transform: translateY(-4px); }
-        .project-card:hover::before { transform: scaleX(1); }
+        .about-right { display: flex; flex-direction: column; gap: 12px; }
 
-        .project-icon { width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
-        .project-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
-        .project-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+        .stat-card {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: 12px; padding: 20px 24px;
+            display: flex; align-items: center; gap: 16px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .stat-card:hover { border-color: var(--blue); transform: translateX(4px); }
 
-        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .tag { font-size: 12px; padding: 4px 10px; background: var(--blue-light); color: var(--blue); border-radius: 20px; font-weight: 500; }
+        .stat-icon { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 500; color: var(--dark); line-height: 1; margin-bottom: 3px; }
+        .stat-label { font-size: 12px; color: var(--gray); }
 
-        .project-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .project-link { font-size: 13px; color: var(--blue); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
-        .project-link:hover { gap: 8px; }
+        /* PROJECTS */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; }
 
-        .finance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .project-card {
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: 14px; padding: 28px;
+            transition: all 0.25s; position: relative; overflow: hidden;
+        }
+        .project-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--yellow));
+            transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+        }
+        .project-card:hover { border-color: var(--blue); box-shadow: 0 8px 24px rgba(37,99,235,0.1); transform: translateY(-3px); }
+        .project-card:hover::after { transform: scaleX(1); }
 
-        .finance-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; background: #fff; }
-        .finance-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #10b981; transform: scaleX(0); transition: transform 0.3s; }
-        .finance-card:hover { border-color: #10b981; box-shadow: 0 8px 30px rgba(16,185,129,0.1); transform: translateY(-4px); }
-        .finance-card:hover::before { transform: scaleX(1); }
+        .project-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+        .project-name { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+        .project-desc { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
 
-        .finance-icon { width: 44px; height: 44px; background: #f0fdf4; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; }
-        .finance-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
-        .finance-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
-        .finance-tag { font-size: 12px; padding: 4px 10px; background: #f0fdf4; color: #10b981; border-radius: 20px; font-weight: 500; }
-        .finance-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .finance-link { font-size: 13px; color: #10b981; text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
-        .finance-link:hover { gap: 8px; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+        .tag { font-size: 11px; font-weight: 500; padding: 3px 9px; background: var(--gray-light); color: var(--gray); border-radius: 99px; border: 1px solid var(--border); }
 
-        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .skill-group { background: var(--light); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-        .skill-group-title { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-        .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-item { font-size: 13px; color: var(--gray); background: #fff; border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+        .project-links { display: flex; gap: 12px; }
+        .project-link { font-size: 12px; font-weight: 600; color: var(--blue); text-decoration: none; transition: color 0.2s; }
+        .project-link:hover { color: #1d4ed8; }
 
-        .exp-list { display: flex; flex-direction: column; gap: 24px; }
-        .exp-card { display: flex; gap: 20px; padding: 24px; border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s; }
-        .exp-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
-        .exp-dot { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        /* FINANCE */
+        #finance { background: var(--dark); }
+        #finance .section-title { color: var(--white); }
+        #finance .section-tag { background: rgba(37,99,235,0.3); color: #93C5FD; }
+
+        .finance-card {
+            background: #1F2937; border: 1px solid #374151;
+            border-radius: 14px; padding: 36px; max-width: 1000px;
+            transition: border-color 0.25s;
+        }
+        .finance-card:hover { border-color: var(--yellow); }
+
+        .finance-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .finance-name { font-size: 24px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+        .finance-desc { font-size: 14px; color: #9CA3AF; line-height: 1.7; max-width: 560px; }
+
+        .finance-link {
+            font-size: 12px; font-weight: 600; color: var(--yellow);
+            text-decoration: none; white-space: nowrap;
+            padding: 8px 16px; border: 1px solid #F59E0B33;
+            border-radius: 8px; transition: all 0.2s;
+        }
+        .finance-link:hover { background: #F59E0B22; }
+
+        .finance-tags { display: flex; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
+        .finance-tag { font-size: 11px; font-weight: 500; color: var(--yellow); background: #F59E0B18; border: 1px solid #F59E0B33; padding: 3px 10px; border-radius: 99px; }
+
+        .finance-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+        .finance-stat-box { background: #111827; border-radius: 10px; padding: 16px 20px; }
+        .finance-stat-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; color: var(--yellow); margin-bottom: 4px; }
+        .finance-stat-label { font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* SKILLS */
+        #skills { background: var(--gray-light); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1000px; }
+        .skill-group { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.2s; }
+        .skill-group:hover { border-color: var(--blue); }
+
+        .skill-group-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .skill-group-icon { font-size: 16px; }
+        .skill-group-title { font-size: 12px; font-weight: 600; color: var(--dark); text-transform: uppercase; letter-spacing: 0.08em; }
+
+        .skill-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-item { font-size: 12px; color: var(--gray); background: var(--gray-light); border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+
+        /* EXPERIENCE */
+        .exp-list { display: flex; flex-direction: column; gap: 16px; max-width: 1000px; }
+        .exp-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 28px; display: grid; grid-template-columns: auto 1fr; gap: 20px; transition: all 0.2s; }
+        .exp-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(37,99,235,0.08); }
+
+        .exp-dot { width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
         .exp-role { font-size: 16px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
-        .exp-company { font-size: 14px; color: var(--blue); margin-bottom: 4px; font-weight: 500; }
-        .exp-period { font-size: 13px; color: var(--gray); margin-bottom: 10px; }
-        .exp-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+        .exp-company { font-size: 13px; color: var(--blue); font-weight: 500; margin-bottom: 4px; }
+        .exp-period { font-size: 12px; color: var(--gray); margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+        .exp-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
 
-        .contact-inner { background: var(--dark); border-radius: 20px; padding: 60px; text-align: center; color: #fff; }
-        .contact-inner h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.5px; }
-        .contact-inner p { color: #94a3b8; font-size: 16px; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        /* CONTACT */
+        #contact { background: var(--white); }
 
-        .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .contact-btn { padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
-        .contact-btn-primary { background: var(--blue); color: #fff; }
-        .contact-btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
-        .contact-btn-secondary { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
-        .contact-btn-secondary:hover { background: rgba(255,255,255,0.2); }
+        .contact-box {
+            background: var(--blue); border-radius: 20px; padding: 56px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center; max-width: 1000px;
+        }
+        .contact-headline { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
+        .contact-sub { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; }
 
-        footer { text-align: center; padding: 24px; font-size: 13px; color: var(--gray); border-top: 1px solid var(--border); }
+        .contact-details { display: flex; flex-direction: column; gap: 16px; }
+        .contact-item { display: flex; flex-direction: column; gap: 2px; }
+        .contact-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .contact-value { font-size: 15px; color: var(--white); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
+        .contact-value:hover { opacity: 0.8; }
+
+        .contact-btns { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+        .btn-white { padding: 10px 20px; background: var(--white); color: var(--blue); border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-outline-white { padding: 10px 20px; background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .btn-outline-white:hover { border-color: var(--white); transform: translateY(-1px); }
+
+        /* FOOTER */
+        footer { padding: 20px 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-left { font-size: 12px; color: var(--gray); }
+        .footer-right { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gray); }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 36px; }
-            .about-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr 1fr; }
             nav { padding: 0 20px; }
-            .nav-links { gap: 16px; }
+            .nav-links { display: none; }
+            .hero { padding: 90px 20px 80px; }
+            .hero-bg-text { display: none; }
             section { padding: 60px 20px; }
-            .contact-inner { padding: 40px 24px; }
+            .about-grid { grid-template-columns: 1fr; gap: 32px; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .contact-box { grid-template-columns: 1fr; padding: 36px 24px; gap: 32px; }
+            .finance-header { flex-direction: column; gap: 16px; }
+            .finance-stats-row { grid-template-columns: 1fr 1fr; }
+            footer { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <nav>
-    <div class="nav-logo">Abhinav Harisri</div>
+    <div class="nav-left">
+        <a href="#" class="nav-logo">Abhinav Harisri</a>
+        <span class="nav-badge">Open to Internships</span>
+    </div>
     <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#finance">Finance Work</a></li>
+        <li><a href="#finance">Finance</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="nav-clock" id="navClock">--:--:--</div>
 </nav>
 
-<div style="position:relative;">
-    <div class="hero">
-        <div class="hero-content">
-            <div class="hero-tag">
-                <span></span>
-                Open to Fintech Internships
+<div class="hero">
+    <div class="hero-bg-text">₹$</div>
+    <div class="hero-content">
+        <h1 class="hero-name">Abhinav Harisri</h1>
+        <p class="hero-subtitle">Finance &nbsp;·&nbsp; Cybersecurity &nbsp;·&nbsp; Risk Analysis</p>
+        <p class="hero-tagline">Fascinated by how money moves, markets behave, and economies are built.</p>
+        <p class="hero-niche">My niche is the patterns behind it all.</p>
+        <div class="hero-btns">
+            <a href="#projects" class="btn-primary">See My Work</a>
+            <a href="#contact" class="btn-secondary">Get in Touch</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num">3<span class="accent">+</span></div>
+                <div class="hero-stat-label">Live projects</div>
             </div>
-            <h1>Hi, I'm <span class="typed" id="typed-name"></span></h1>
-            <p class="hero-sub">I build financial tools. I understand security. I'm looking for where both matter.</p>
-            <p class="hero-desc">
-                Final year B.Tech Cybersecurity at Presidency University, Bengaluru —
-                focused on fintech, financial risk, and fraud detection.
-            </p>
-            <div class="hero-btns">
-                <a href="#projects" class="btn-primary">View My Projects</a>
-                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            <div class="hero-stat">
+                <div class="hero-stat-num">2</div>
+                <div class="hero-stat-label">Internships</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">7</div>
+                <div class="hero-stat-label">Stocks tracked</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">284<span class="accent">K</span></div>
+                <div class="hero-stat-label">Transactions analyzed</div>
             </div>
         </div>
     </div>
-    <div class="hero-scroll">
-        <div class="scroll-line"></div>
+    <div class="hero-clock-strip">
+        <div class="hero-clock-left">
+            <span class="hero-clock-label">📍 Bengaluru, India · IST</span>
+            <span class="hero-clock-time" id="heroClock">--:--:--</span>
+        </div>
+        <span class="hero-clock-date" id="heroDate">--- --, ----</span>
     </div>
 </div>
 
 <section id="about">
-    <div class="section-label">About Me</div>
-    <div class="section-title">The Story So Far</div>
-    <div class="section-divider"></div>
+    <div class="section-eyebrow"><span class="section-tag">About Me</span></div>
+    <div class="section-title">The story so far</div>
     <div class="about-grid">
-        <div class="about-text">
-            <p>Found my interest in finance halfway through a cybersecurity degree. Never looked back.</p>
-            <p>Spent the last year understanding how money moves, how systems protect it, and how fraud happens at scale. My niche is financial risk and the systems behind it.</p>
-            <div class="about-highlight">
-                <strong>What I'm looking for:</strong> Fintech analyst, data analyst, or product-adjacent roles at early stage startups — where engineering background meets financial thinking.
+        <div>
+            <p class="about-text">I started in <strong>cybersecurity</strong> — learning how systems get attacked, defended, and broken. Halfway through, I got genuinely curious about <strong>how money actually moves</strong>. How payments work. How risk is measured. How markets behave.</p>
+            <p class="about-text">That curiosity turned into months of self-directed study — UPI architecture, payment flows, financial risk models, and equity research. I didn't just read about it. I started thinking about it, tracking it, and building things around it.</p>
+            <div class="about-callout">
+                <strong>What I'm looking for:</strong> Roles in finance, research, analytics, or operations — where curiosity matters more than a traditional background.
             </div>
         </div>
-        <div class="about-stats">
+        <div class="about-right">
             <div class="stat-card">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Live deployed projects</div>
+                <div class="stat-icon">📈</div>
+                <div><div class="stat-num">3+</div><div class="stat-label">Live deployed projects</div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">2</div>
-                <div class="stat-label">Internships completed</div>
+                <div class="stat-icon">💼</div>
+                <div><div class="stat-num">2</div><div class="stat-label">Real internships completed</div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">284K</div>
-                <div class="stat-label">Transactions analyzed</div>
+                <div class="stat-icon">🔬</div>
+                <div><div class="stat-num">284K</div><div class="stat-label">Transactions analyzed</div></div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Freelance clients served</div>
+                <div class="stat-icon">📊</div>
+                <div><div class="stat-num">7</div><div class="stat-label">Stocks tracked with analysis</div></div>
             </div>
         </div>
     </div>
 </section>
 
 <section id="projects">
-    <div class="section-label">Projects</div>
-    <div class="section-title">Things I've Built</div>
-    <div class="section-divider"></div>
+    <div class="section-eyebrow"><span class="section-tag">Projects</span></div>
+    <div class="section-title">Things I've built</div>
     <div class="projects-grid">
         <div class="project-card">
-            <div class="project-icon">📈</div>
+            <span class="project-icon">📈</span>
             <div class="project-name">RiskLens</div>
-            <div class="project-desc">A web app that analyzes stock portfolio risk using real market data. Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility, and correlation heatmap across Indian and US stocks.</div>
+            <p class="project-desc">Stock portfolio risk analyzer using real market data. Calculates Sharpe Ratio, Value at Risk (95%), annualised volatility, and correlation heatmap across Indian and US stocks.</p>
             <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Flask</span>
-                <span class="tag">yfinance</span>
-                <span class="tag">Pandas</span>
-                <span class="tag">Plotly</span>
+                <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">yfinance</span><span class="tag">Plotly</span><span class="tag">Risk Analysis</span>
             </div>
             <div class="project-links">
                 <a href="https://stock-risk-analyzer-l02b.onrender.com" target="_blank" class="project-link">Live Demo →</a>
                 <a href="https://github.com/abhinavharisri/stock-risk-analyzer" target="_blank" class="project-link">GitHub →</a>
             </div>
         </div>
-
         <div class="project-card">
-            <div class="project-icon">🛡️</div>
-            <div class="project-name">FraudShield</div>
-            <div class="project-desc">A machine learning system that detects fraudulent credit card transactions in real time. Trained on 284,807 real transactions using Random Forest and SMOTE to handle extreme class imbalance.</div>
+            <span class="project-icon">🌐</span>
+            <div class="project-name">Freelance Web Dev</div>
+            <p class="project-desc">Built and deployed websites for three paying clients — boutique fashion store with WhatsApp checkout, a resort, and a manufacturing factory showcase. End-to-end delivery.</p>
             <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">scikit-learn</span>
-                <span class="tag">SMOTE</span>
-                <span class="tag">Flask</span>
-                <span class="tag">Plotly</span>
+                <span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Vercel</span><span class="tag">Client Work</span>
             </div>
             <div class="project-links">
-                <a href="https://fraud-detection-wcw1.onrender.com" target="_blank" class="project-link">Live Demo →</a>
-                <a href="https://github.com/abhinavharisri/fraud-detection" target="_blank" class="project-link">GitHub →</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-icon">🌐</div>
-            <div class="project-name">Freelance Web Development</div>
-            <div class="project-desc">Built and deployed websites for three paying clients — a boutique fashion store with WhatsApp-based checkout integration, a resort with full business web presence, and a manufacturing factory showcase site.</div>
-            <div class="project-tags">
-                <span class="tag">HTML/CSS</span>
-                <span class="tag">JavaScript</span>
-                <span class="tag">Vercel</span>
-                <span class="tag">Client Work</span>
-            </div>
-            <div class="project-links">
-                <a href="https://www.thamaraidesigners.com/" target="_blank" class="project-link">Thamarai Designers →</a>
-                <a href="https://mandarin-navy.vercel.app/" target="_blank" class="project-link">Mandarin Resort →</a>
+                <a href="https://www.thamaraidesigners.com/" target="_blank" class="project-link">Thamarai →</a>
+                <a href="https://mandarin-navy.vercel.app/" target="_blank" class="project-link">Mandarin →</a>
             </div>
         </div>
     </div>
 </section>
 
 <section id="finance">
-    <div class="section-label">Finance Work</div>
-    <div class="section-title">Market Analysis & Research</div>
-    <div class="section-divider"></div>
-    <div class="finance-grid">
-        <div class="finance-card">
-            <div class="finance-icon">📊</div>
-            <div class="finance-name">Stock Buy/Sell Tracker</div>
-            <div class="finance-desc">Personal stock tracker analyzing 7 companies across Indian and US markets. Each stock rated Buy/Sell/Hold based on fundamental analysis — revenue growth, valuation multiples, market position, and macro tailwinds. Portfolio bias: Bullish (5 Buys, 1 Hold, 1 Sell).</div>
-            <div class="finance-tags">
-                <span class="finance-tag">Fundamental Analysis</span>
-                <span class="finance-tag">Equity Research</span>
-                <span class="finance-tag">Excel</span>
+    <div class="section-eyebrow"><span class="section-tag">Finance Work</span></div>
+    <div class="section-title">Market research & analysis</div>
+    <div class="finance-card">
+        <div class="finance-header">
+            <div>
+                <div class="finance-name">Stock Buy/Sell Tracker — June 2026</div>
+                <p class="finance-desc">Personal stock tracker with fundamental analysis across 7 Indian and US companies. Each rated Buy/Sell/Hold backed by revenue data, valuation multiples, market position, and macro tailwinds.</p>
             </div>
-            <div class="project-links">
-                <a href="abhinavstocktrackerjune.pdf" target="_blank" class="finance-link">View Tracker →</a>
-            </div>
+            <a href="abhinavstocktrackerjune.pdf" target="_blank" class="finance-link">View Tracker ↗</a>
+        </div>
+        <div class="finance-tags">
+            <span class="finance-tag">Fundamental Analysis</span>
+            <span class="finance-tag">Equity Research</span>
+            <span class="finance-tag">Excel</span>
+            <span class="finance-tag">Valuation</span>
+        </div>
+        <div class="finance-stats-row">
+            <div class="finance-stat-box"><div class="finance-stat-num">7</div><div class="finance-stat-label">Stocks Analyzed</div></div>
+            <div class="finance-stat-box"><div class="finance-stat-num">5</div><div class="finance-stat-label">Buy Ratings</div></div>
+            <div class="finance-stat-box"><div class="finance-stat-num">Bullish</div><div class="finance-stat-label">Portfolio Bias</div></div>
         </div>
     </div>
 </section>
 
 <section id="skills">
-    <div class="section-label">Skills</div>
-    <div class="section-title">What I Work With</div>
-    <div class="section-divider"></div>
+    <div class="section-eyebrow"><span class="section-tag">Skills</span></div>
+    <div class="section-title">What I work with</div>
     <div class="skills-grid">
         <div class="skill-group">
-            <div class="skill-group-title">Languages & Frameworks</div>
+            <div class="skill-group-header"><span class="skill-group-icon">💰</span><span class="skill-group-title">Finance & Economics</span></div>
             <div class="skill-list">
-                <span class="skill-item">Python</span>
-                <span class="skill-item">Flask</span>
-                <span class="skill-item">JavaScript</span>
-                <span class="skill-item">HTML/CSS</span>
-                <span class="skill-item">SQL</span>
+                <span class="skill-item">Equity Research</span><span class="skill-item">Risk Analysis</span><span class="skill-item">VaR</span><span class="skill-item">Sharpe Ratio</span><span class="skill-item">Financial Statements</span><span class="skill-item">Market Analysis</span>
             </div>
         </div>
         <div class="skill-group">
-            <div class="skill-group-title">Data & ML</div>
+            <div class="skill-group-header"><span class="skill-group-icon">💳</span><span class="skill-group-title">Fintech & Payments</span></div>
             <div class="skill-list">
-                <span class="skill-item">Pandas</span>
-                <span class="skill-item">NumPy</span>
-                <span class="skill-item">scikit-learn</span>
-                <span class="skill-item">Plotly</span>
-                <span class="skill-item">SMOTE</span>
+                <span class="skill-item">UPI Architecture</span><span class="skill-item">P2P / P2M</span><span class="skill-item">Payment Flows</span><span class="skill-item">AML / KYC</span><span class="skill-item">Fraud Detection</span>
             </div>
         </div>
         <div class="skill-group">
-            <div class="skill-group-title">Finance & Fintech</div>
+            <div class="skill-group-header"><span class="skill-group-icon">⌨️</span><span class="skill-group-title">Technical</span></div>
             <div class="skill-list">
-                <span class="skill-item">Risk Analysis</span>
-                <span class="skill-item">VaR</span>
-                <span class="skill-item">Sharpe Ratio</span>
-                <span class="skill-item">UPI Architecture</span>
-                <span class="skill-item">Fraud Detection</span>
-                <span class="skill-item">P2P / P2M</span>
-                <span class="skill-item">Equity Research</span>
+                <span class="skill-item">Python</span><span class="skill-item">Excel</span><span class="skill-item">SQL</span><span class="skill-item">Data Analysis</span><span class="skill-item">JavaScript</span>
             </div>
         </div>
         <div class="skill-group">
-            <div class="skill-group-title">Cybersecurity</div>
+            <div class="skill-group-header"><span class="skill-group-icon">🔐</span><span class="skill-group-title">Cybersecurity</span></div>
             <div class="skill-list">
-                <span class="skill-item">Network Security</span>
-                <span class="skill-item">Malware Analysis</span>
-                <span class="skill-item">Web Security</span>
-                <span class="skill-item">IDS/IPS</span>
-                <span class="skill-item">Cryptography</span>
+                <span class="skill-item">Network Security</span><span class="skill-item">Malware Analysis</span><span class="skill-item">Web Security</span><span class="skill-item">Cryptography</span>
             </div>
         </div>
         <div class="skill-group">
-            <div class="skill-group-title">Tools & Platforms</div>
+            <div class="skill-group-header"><span class="skill-group-icon">🛠️</span><span class="skill-group-title">Tools</span></div>
             <div class="skill-list">
-                <span class="skill-item">Git</span>
-                <span class="skill-item">GitHub</span>
-                <span class="skill-item">Excel</span>
-                <span class="skill-item">VS Code</span>
-                <span class="skill-item">Render</span>
-                <span class="skill-item">Vercel</span>
+                <span class="skill-item">Git / GitHub</span><span class="skill-item">VS Code</span><span class="skill-item">Render</span><span class="skill-item">Vercel</span>
             </div>
         </div>
         <div class="skill-group">
-            <div class="skill-group-title">Concepts</div>
+            <div class="skill-group-header"><span class="skill-group-icon">🧠</span><span class="skill-group-title">Concepts</span></div>
             <div class="skill-list">
-                <span class="skill-item">REST APIs</span>
-                <span class="skill-item">Machine Learning</span>
-                <span class="skill-item">Data Analysis</span>
-                <span class="skill-item">Product Thinking</span>
-                <span class="skill-item">Payment Systems</span>
+                <span class="skill-item">Product Thinking</span><span class="skill-item">Market Research</span><span class="skill-item">Investor Relations</span><span class="skill-item">Financial Modeling</span>
             </div>
         </div>
     </div>
 </section>
 
 <section id="experience">
-    <div class="section-label">Experience</div>
-    <div class="section-title">Where I've Worked</div>
-    <div class="section-divider"></div>
+    <div class="section-eyebrow"><span class="section-tag">Experience</span></div>
+    <div class="section-title">Where I've worked</div>
     <div class="exp-list">
         <div class="exp-card">
             <div class="exp-dot">🚀</div>
@@ -434,7 +578,7 @@
                 <div class="exp-role">Fundraising & Partnerships Intern</div>
                 <div class="exp-company">Streetplay.ai</div>
                 <div class="exp-period">Jul 2025 — Oct 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">Identified and connected with 20+ early-stage investors in the US focused on Sports Tech and AI. Refined pitch deck and fundraising narrative; built partnerships with football turfs and academies.</div>
+                <p class="exp-desc">Identified and connected with 20+ early-stage investors in the US focused on Sports Tech and AI. Refined pitch deck and fundraising narrative; built partnerships with football turfs and academies.</p>
             </div>
         </div>
         <div class="exp-card">
@@ -443,7 +587,7 @@
                 <div class="exp-role">Finance Accounting Intern</div>
                 <div class="exp-company">Superior Electric Machines Pvt Ltd</div>
                 <div class="exp-period">Mar 2025 — Jun 2025 · 4 months · Bengaluru</div>
-                <div class="exp-desc">Prepared monthly financial statements for a manufacturing firm. Assisted with audit readiness and cost management.</div>
+                <p class="exp-desc">Prepared monthly financial statements, balance sheets, and P&L reports for a manufacturing firm. Assisted with audit readiness and cost management.</p>
             </div>
         </div>
         <div class="exp-card">
@@ -452,51 +596,92 @@
                 <div class="exp-role">Freelance Web Developer</div>
                 <div class="exp-company">Independent Clients</div>
                 <div class="exp-period">2024 — Present · Bengaluru</div>
-                <div class="exp-desc">Built and deployed websites for three paying clients — boutique fashion store with WhatsApp checkout integration, resort with full business web presence, and manufacturing factory showcase site.</div>
+                <p class="exp-desc">Built and deployed websites for three paying clients — boutique fashion store, resort, and manufacturing factory. End-to-end development from design to deployment.</p>
             </div>
         </div>
     </div>
 </section>
 
 <section id="contact">
-    <div class="contact-inner">
-        <h2>Let's Work Together</h2>
-        <p>I'm actively looking for fintech internships. If you're building something in payments, risk, fraud, or financial data — I'd genuinely love to talk.</p>
-        <div class="contact-links">
-            <a href="mailto:abhinavharisri@gmail.com" class="contact-btn contact-btn-primary">abhinavharisri@gmail.com</a>
-            <a href="https://www.linkedin.com/in/abhinav-h-897152250/" target="_blank" class="contact-btn contact-btn-secondary">LinkedIn →</a>
-            <a href="https://github.com/abhinavharisri" target="_blank" class="contact-btn contact-btn-secondary">GitHub →</a>
+    <div class="section-eyebrow"><span class="section-tag">Contact</span></div>
+    <div class="section-title">Let's talk</div>
+    <div class="contact-box">
+        <div>
+            <h2 class="contact-headline">Building something in finance or markets?</h2>
+            <p class="contact-sub">I'm actively looking for internships. If you're working on something interesting — payments, risk, investing, or anything where markets meet technology — I'd love to talk.</p>
+        </div>
+        <div class="contact-details">
+            <div class="contact-item">
+                <span class="contact-label">Email</span>
+                <a href="mailto:abhinavharisri@gmail.com" class="contact-value">abhinavharisri@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Location</span>
+                <span class="contact-value" style="cursor:default;">Bengaluru, India</span>
+            </div>
+            <div class="contact-btns">
+                <a href="https://www.linkedin.com/in/abhinav-h-897152250/" target="_blank" class="btn-white">LinkedIn</a>
+                <a href="https://github.com/abhinavharisri" target="_blank" class="btn-outline-white">GitHub</a>
+            </div>
         </div>
     </div>
 </section>
 
 <footer>
-    Built by Abhinav Harisri · 2026
+    <div class="footer-left">© 2026 Abhinav Harisri · Bengaluru, India</div>
+    <div class="footer-right" id="footerClock">--:--:--</div>
 </footer>
 
 <script>
-    const name = "Abhinav.";
-    let i = 0;
-    const el = document.getElementById('typed-name');
-    function type() {
-        if (i < name.length) {
-            el.textContent += name[i];
-            i++;
-            setTimeout(type, 100);
-        }
+    // CURSOR
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+    });
+
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.08;
+        ringY += (mouseY - ringY) * 0.08;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
     }
-    setTimeout(type, 500);
+    animateRing();
 
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+        el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+    });
+
+    // CLOCK
+    function updateClock() {
+        const ist = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+        const h = String(ist.getHours()).padStart(2, '0');
+        const m = String(ist.getMinutes()).padStart(2, '0');
+        const s = String(ist.getSeconds()).padStart(2, '0');
+        const t = `${h}:${m}:${s}`;
+        const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const d = `${days[ist.getDay()]}, ${months[ist.getMonth()]} ${ist.getDate()}, ${ist.getFullYear()}`;
+        document.getElementById('heroClock').textContent = t;
+        document.getElementById('heroDate').textContent = d;
+        document.getElementById('navClock').textContent = t;
+        document.getElementById('footerClock').textContent = t;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // SCROLL REVEAL
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 </script>
-
 </body>
 </html>
