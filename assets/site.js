@@ -40,6 +40,9 @@
     tick();
     setInterval(tick, 1000);
 
+    var coin = document.querySelector('.coin');
+    if (coin) spinCoin(coin);
+
     var button = corner.querySelector('.theme');
     function label() {
       button.textContent = isDark() ? 'light' : 'dark';
@@ -53,4 +56,61 @@
       label();
     });
   });
+
+  // The homepage coin: idles in a slow spin, drag to spin it, click to flick it.
+  function spinCoin(coin) {
+    var body = coin.querySelector('.coin-body');
+
+    // stacked discs give the coin its edge when it turns side-on
+    for (var z = -2.5; z <= 2.5; z += 0.5) {
+      var layer = document.createElement('span');
+      layer.className = 'layer';
+      layer.style.transform = 'translateZ(' + z + 'px)';
+      body.insertBefore(layer, body.firstChild);
+    }
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var idle = 0.5, angle = -25, speed = idle;
+    var dragging = false, lastX = 0, moved = 0;
+
+    (function loop() {
+      if (!dragging) {
+        angle += speed;
+        speed += (idle - speed) * 0.025;
+      }
+      body.style.transform = 'rotateY(' + angle + 'deg)';
+      requestAnimationFrame(loop);
+    })();
+
+    function flick() {
+      speed += 28;
+      coin.classList.remove('toss');
+      void coin.offsetWidth;
+      coin.classList.add('toss');
+    }
+
+    coin.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      lastX = e.clientX;
+      moved = 0;
+      coin.setPointerCapture(e.pointerId);
+    });
+    coin.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - lastX;
+      lastX = e.clientX;
+      moved += Math.abs(dx);
+      angle += dx * 1.4;
+      speed = dx * 1.4;
+    });
+    coin.addEventListener('pointerup', function () {
+      dragging = false;
+      if (moved < 4) flick();
+    });
+    coin.addEventListener('pointercancel', function () { dragging = false; });
+    coin.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flick(); }
+    });
+  }
 })();
