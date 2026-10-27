@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#1a1a1a"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>circle{fill:#1a1a1a}@media (prefers-color-scheme:dark){circle{fill:#ebe9e4}}</style><circle cx="32" cy="32" r="22"/></svg>
