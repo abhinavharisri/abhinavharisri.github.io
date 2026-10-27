@@ -8,6 +8,7 @@
   --soft: #5c5a55;
   --faint: #8f8c85;
   --line: #e2dfd8;
+  --signal: #ff4a1c;
   color-scheme: light;
 }
 
@@ -125,56 +126,19 @@ a:hover, a:focus-visible { background-size: 100% 1px; outline: none; }
   padding-bottom: 48px;
 }
 
-/* the coin: AH on one side, ₹ on the other; drag to spin, click to flick */
-.coin {
+/* the mark: AH -> hundrd -> sphere in 3D pixels; click to morph */
+.mark {
   align-self: flex-start;
-  width: 60px;
-  height: 60px;
-  margin-bottom: 28px;
+  margin: -16px -16px 12px;
   padding: 0;
   border: 0;
   background: none;
-  perspective: 500px;
-  cursor: grab;
-  touch-action: pan-y;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-.coin:active { cursor: grabbing; }
-.coin:focus-visible { outline: 1px dashed var(--faint); outline-offset: 6px; }
-
-.coin-body {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-.coin.toss { animation: toss .7s cubic-bezier(.3, .7, .4, 1); }
-@keyframes toss { 40% { transform: translateY(-22px); } 100% { transform: none; } }
-
-.coin .face, .coin .layer {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-}
-
-.coin .face {
-  display: grid;
-  place-items: center;
-  background: var(--bg);
-  color: var(--ink);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  box-shadow: inset 0 0 0 1.5px var(--ink), inset 0 0 0 5px var(--bg), inset 0 0 0 6px var(--ink);
-  backface-visibility: hidden;
-}
-
-.coin .front { transform: translateZ(3px); }
-.coin .back { transform: rotateY(180deg) translateZ(3px); font-size: 22px; font-weight: 500; }
-.coin .layer { background: var(--ink); }
+.mark canvas { display: block; width: 120px; height: 120px; }
+.mark:focus-visible { outline: 1px dashed var(--faint); outline-offset: -8px; }
 
 .home .name { font-size: 18px; font-weight: 600; }
 .home .line { margin-top: 6px; color: var(--soft); }
