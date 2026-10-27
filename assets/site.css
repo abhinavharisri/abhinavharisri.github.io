@@ -1,0 +1,206 @@
+/* One stylesheet for every page: plain paper, one font, one animation. */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f7f6f2;
+  --ink: #1a1a1a;
+  --soft: #5c5a55;
+  --faint: #8f8c85;
+  --line: #e2dfd8;
+}
+
+html { background: var(--bg); }
+
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* links: one style everywhere, underline grows in on hover */
+a {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size .35s ease;
+}
+
+a:hover, a:focus-visible { background-size: 100% 1px; outline: none; }
+
+/* the only animation on the site: content fades up, one block after another */
+@keyframes up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.page > *, article > * { animation: up .6s ease both; }
+.page > :nth-child(2), article > :nth-child(2) { animation-delay: .06s; }
+.page > :nth-child(3), article > :nth-child(3) { animation-delay: .12s; }
+.page > :nth-child(4), article > :nth-child(4) { animation-delay: .18s; }
+.page > :nth-child(5), article > :nth-child(5) { animation-delay: .24s; }
+.page > :nth-child(6), article > :nth-child(6) { animation-delay: .30s; }
+.page > :nth-child(n+7), article > :nth-child(n+7) { animation-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page > *, article > * { animation: none; }
+  a { transition: none; }
+}
+
+/* ===== Layout ===== */
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 72px 24px 96px;
+}
+
+.page.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.home .name { font-size: 18px; font-weight: 600; }
+.home .line { margin-top: 6px; color: var(--soft); }
+
+.home nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 40px;
+  letter-spacing: 0.02em;
+}
+
+.home .status { margin-top: 40px; font-size: 14px; color: var(--faint); }
+
+.top { display: inline-block; font-size: 14px; color: var(--soft); }
+
+h1 {
+  margin: 40px 0 24px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.page > p, article p { margin-bottom: 16px; color: var(--soft); }
+p strong, li strong { color: var(--ink); font-weight: 600; }
+p a, .list a { text-decoration: none; background-size: 100% 1px; background-image: linear-gradient(var(--line), var(--line)); }
+p a:hover, .list a:hover { background-image: linear-gradient(currentColor, currentColor); }
+
+/* simple stacked list: experience, notes, contact */
+.list { list-style: none; margin-top: 32px; border-top: 1px solid var(--line); }
+
+.list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.list .meta { color: var(--faint); font-size: 14px; font-variant-numeric: tabular-nums; }
+.list .sub { grid-column: 1 / -1; color: var(--soft); font-size: 14px; }
+.list .links { grid-column: 1 / -1; display: flex; gap: 18px; font-size: 14px; }
+
+.more { display: inline-block; margin-top: 32px; }
+
+/* ===== Notes ===== */
+
+.bar {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--soft);
+}
+
+article {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.kicker { display: block; margin-top: 40px; font-size: 13px; color: var(--faint); }
+article h1 { margin: 6px 0 10px; }
+.dek { font-size: 18px; color: var(--soft); }
+p.meta { margin: 12px 0 36px; padding-bottom: 24px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--faint); }
+
+article h2 { margin: 40px 0 10px; font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+
+article ul, article ol { margin: 0 0 20px 20px; color: var(--soft); }
+article li { margin-bottom: 8px; padding-left: 4px; }
+
+blockquote {
+  margin: 28px 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--ink);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+blockquote em, h1 em { font-style: normal; }
+
+.cast { margin: 8px 0 24px; border-top: 1px solid var(--line); }
+.cast div { display: grid; grid-template-columns: 160px 1fr; gap: 2px 20px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.cast dt { font-weight: 500; }
+.cast dd { color: var(--soft); }
+
+.flow { list-style: decimal; }
+.flow li strong { display: block; }
+
+.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0 24px; }
+.versus div { padding: 16px 18px; border: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--soft); }
+.versus div.pick { border-color: var(--ink); }
+.versus b { display: block; margin-bottom: 4px; font-weight: 600; color: var(--ink); }
+.versus .tag { display: block; margin-bottom: 8px; font-size: 12px; color: var(--faint); }
+
+.split { display: flex; gap: 2px; height: 8px; margin: 8px 0 6px; }
+.split span:first-child { flex: 7; background: var(--ink); }
+.split span:last-child { flex: 3; background: var(--line); }
+.split-legend { display: flex; justify-content: space-between; margin-bottom: 24px; font-size: 13px; color: var(--faint); }
+
+.next {
+  display: block;
+  max-width: 552px;
+  margin: 24px auto 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  background: none;
+}
+
+.next span { display: block; font-size: 13px; color: var(--faint); }
+.next b { font-weight: 600; }
+.next:hover b { text-decoration: underline; text-underline-offset: 3px; }
+
+footer {
+  max-width: 552px;
+  margin: 0 auto;
+  padding: 20px 0 64px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--faint);
+}
+
+@media (max-width: 600px) {
+  .page { padding-top: 48px; }
+  article { font-size: 16px; }
+  .cast div { grid-template-columns: 1fr; }
+  .versus { grid-template-columns: 1fr; }
+  .next, footer { margin-left: 24px; margin-right: 24px; }
+}
