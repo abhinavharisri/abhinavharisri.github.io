@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhinav Harisri</title>
-  <meta name="description" content="Abhinav Harisri builds websites at hundrd, a web studio in Bengaluru, and studies how money moves. Open to internships in finance, research and analytics.">
+  <meta name="description" content="Abhinav Harisri, founder of hundrd, a web studio in Bengaluru. Equity research, risk analysis and investing. Open to internships in finance, research and analytics.">
   <meta property="og:title" content="Abhinav Harisri">
   <meta property="og:description" content="Founder of hundrd, a web studio in Bengaluru. Open to internships in finance, research and analytics.">
   <meta property="og:image" content="https://abhinavharisri.github.io/assets/horizon.jpg">
   <meta property="og:url" content="https://abhinavharisri.github.io/">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <meta name="theme-color" content="#0b0a0c">
   <link rel="preload" as="image" href="assets/horizon.jpg" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,8 +135,8 @@
       transform: translateY(-50%);
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(26px, 3.4vw, 50px);
-      line-height: 1.15;
+      font-size: clamp(44px, 6vw, 88px);
+      line-height: 1.05;
       letter-spacing: -0.01em;
       text-align: center;
       text-wrap: balance;
@@ -143,6 +146,18 @@
     .line em { color: var(--glow); }
     .line a { border-bottom: 1px solid rgba(255, 207, 138, 0.4); transition: border-color .3s; }
     .line a:hover { border-bottom-color: var(--glow); }
+
+    .line .sub {
+      display: block;
+      margin-top: 22px;
+      font-family: var(--sans);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .line .sub i { font-style: normal; margin: 0 10px; color: var(--glow); }
 
     .horizon {
       position: absolute;
@@ -241,6 +256,8 @@
     }
 
     .row-title { color: var(--ink); }
+    .row-title a { border-bottom: 1px solid var(--line); transition: border-color .2s, color .2s; }
+    .row-title a:hover { color: var(--glow); border-bottom-color: var(--glow); }
     .row-meta { color: var(--ink-faint); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
     .row-sub { grid-column: 1 / -1; color: var(--ink-soft); font-size: 14px; }
     .row-links { grid-column: 1 / -1; display: flex; gap: 20px; margin-top: 6px; font-size: 13px; letter-spacing: 0.04em; }
@@ -254,12 +271,14 @@
     /* ===== Small screens ===== */
 
     @media (max-width: 700px) {
-      .scene-img { background-position: 54% 40%; }
+      .scene-img { background-position: 56% 40%; }
       .corner.tl, .back { top: 22px; left: 20px; }
       .corner.tr { top: 22px; right: 20px; }
       .corner.bl { bottom: 22px; left: 20px; right: 20px; }
       .corner.br { display: none; }
       .line { top: 30%; padding: 0 20px; }
+      .line .sub { font-size: 11px; letter-spacing: 0.12em; }
+      .line .sub i { margin: 0 6px; }
       .horizon { padding: 0 20px; gap: 10px; }
       .horizon a { font-size: 14px; letter-spacing: 0.05em; }
       .panel { padding: 80px 20px 64px; }
@@ -281,7 +300,8 @@
     <div class="corner tr in d1" id="clock">Bengaluru</div>
 
     <h1 class="line in d2">
-      Abhinav builds websites at <a href="https://hundrd.studio" target="_blank" rel="noopener"><em>hundrd</em></a> and studies how money moves.
+      Building <a href="https://hundrd.studio" target="_blank" rel="noopener"><em>hundrd</em></a>.
+      <span class="sub">Equity Research <i>·</i> Risk Analysis <i>·</i> Investing</span>
     </h1>
 
     <nav class="horizon in d3">
@@ -299,9 +319,9 @@
     <a href="#" class="back">← back</a>
     <div class="panel-inner">
       <h2>About</h2>
-      <p><strong>Abhinav Harisri</strong> is the founder of <a href="https://hundrd.studio" target="_blank" rel="noopener">hundrd</a>, a Bengaluru studio that designs, builds and hosts fast, secure websites for businesses that operate at scale, down to the hundredth detail.</p>
-      <p>The path there wasn't a straight line. Abhinav started out in cybersecurity, learning how systems break, then got pulled toward a different question: how money moves. Payments, risk, markets. That curiosity led to fundraising work at a sports-tech startup, finance work at a manufacturer, and a habit of tracking the market every month.</p>
-      <p>Alongside the studio, Abhinav is open to <strong>internships in finance, research and analytics</strong>.</p>
+      <p>I'm <strong>Abhinav</strong>. I run <a href="https://hundrd.studio" target="_blank" rel="noopener">hundrd</a>, a Bengaluru studio that designs, builds and hosts fast, secure websites for businesses that operate at scale, down to the hundredth detail.</p>
+      <p>The path here wasn't a straight line. I started out in cybersecurity, learning how systems break, then got pulled toward a different question: how money moves. Payments, risk, markets. That curiosity led to fundraising work at a sports-tech startup, finance work at a manufacturer, and a habit of tracking the market every month.</p>
+      <p>Alongside the studio, I'm open to <strong>internships in finance, research and analytics</strong>.</p>
 
       <div class="rows">
         <div class="row">
@@ -310,12 +330,12 @@
           <span class="row-sub">Web studio. Design, build and hosting under one roof.</span>
         </div>
         <div class="row">
-          <span class="row-title">Fundraising &amp; Partnerships, Streetplay.ai</span>
+          <span class="row-title">Fundraising &amp; Partnerships, <a href="https://streetplay.ai/" target="_blank" rel="noopener">Streetplay.ai</a></span>
           <span class="row-meta">2025</span>
           <span class="row-sub">Sourced 20+ US investors in sports tech and AI, sharpened the pitch, and built partnerships with turfs and academies.</span>
         </div>
         <div class="row">
-          <span class="row-title">Finance &amp; Accounting, Superior Electric Machines</span>
+          <span class="row-title">Finance &amp; Accounting, <a href="https://www.superiorelectric.in/" target="_blank" rel="noopener">Superior Electric Machines</a></span>
           <span class="row-meta">2025</span>
           <span class="row-sub">Monthly statements, balance sheets and P&amp;L for a manufacturing firm, plus audit readiness.</span>
         </div>
@@ -327,7 +347,7 @@
     <a href="#" class="back">← back</a>
     <div class="panel-inner">
       <h2>Markets</h2>
-      <p>Outside the studio, Abhinav reads markets: what moves them, how risk gets priced, and where the patterns hide.</p>
+      <p>Outside the studio, I study markets: what moves them, how risk gets priced, and where the patterns hide.</p>
 
       <div class="rows">
         <div class="row">
