@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why “Pending” feels so scary · Abhinav Harisri</title>
+  <meta name="description" content="Money gone from my account, not in theirs, and a single word on the screen.">
+  <meta property="og:title" content="Why “Pending” feels so scary">
+  <meta property="og:description" content="Money gone from my account, not in theirs, and a single word on the screen.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://abhinavharisri.github.io/assets/horizon.jpg">
+  <meta property="og:url" content="https://abhinavharisri.github.io/notes/why-pending-feels-scary.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/note.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <nav class="bar"><a href="../#notes">← notes</a><a href="../">Abhinav Harisri</a></nav>
+
+  <article>
+    <span class="kicker">Note 03 · Product</span>
+    <h1>Why “Pending” feels so <em>scary</em></h1>
+    <p class="dek">Money gone from my account, not in theirs, and a single word on the screen.</p>
+    <p class="meta">4 min read</p>
+
+    <p>Pending means the money has been <strong>debited from the sender</strong> but the receiver's bank <strong>hasn't confirmed the credit</strong> yet. It's the most stressful state in any payments app, and it says almost nothing.</p>
+
+    <h2>Why it happens</h2>
+    <p>UPI is asynchronous. Banks respond at different speeds, and NPCI waits for confirmation before it reports success or failure either way. The app can't guess whether the money has landed or when it will. So it waits, and shows a word.</p>
+    <p>If confirmation never comes, the payment is treated as failed and the money goes back to the sender. Banks have to auto-reverse failed UPI debits within a set timeline, usually by the next working day. But the screen rarely tells you any of that.</p>
+
+    <h2>Why users blame the app</h2>
+    <p>Users don't see NPCI or the banks. They see the app. So when money disappears and nothing arrives, the app takes the blame, even when the delay is somewhere else entirely.</p>
+
+    <blockquote>Because the app is the only visible entity, it absorbs all the blame, even when the failure is <em>upstream</em>.</blockquote>
+
+    <p>As a user, I get it. Pending is scary because something you sent is gone and you can't see where it is. That has a real emotional pull, especially when the amount matters.</p>
+
+    <h2>What would calm people down</h2>
+    <ul>
+      <li><strong>A clear message, not a word.</strong> Confused, scared users contact support, uninstall, and tell their friends. Calm users trust the app more and keep using it.</li>
+      <li><strong>A timeline.</strong> "You'll have your money back by tomorrow" is a promise. People can wait for a promise. They can't wait for a spinner.</li>
+      <li><strong>Visible support options.</strong> Knowing someone is on it, and how to reach them, matters most when the amount is large.</li>
+    </ul>
+
+    <blockquote>If I were the PM, “Pending” would never sit alone for more than <em>15 minutes</em>. After that, the screen should say what happens next and who to contact.</blockquote>
+
+    <p>I turned this into a small case study: what I'd change on the pending screen, why, and how I'd measure it.</p>
+  </article>
+
+  <a class="next" href="pending-screen-case-study.html"><span>Next note</span><b>Case study: fixing the pending screen</b></a>
+  <footer><span>© 2026 Abhinav Harisri</span><a href="../#contact">Say hello →</a></footer>
+</body>
+</html>

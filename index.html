@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abhinav Harisri</title>
-  <meta name="description" content="Abhinav Harisri, founder of hundrd, a web studio in Bengaluru. Equity research, risk analysis and investing. Open to internships in finance, research and analytics.">
+  <meta name="description" content="Abhinav Harisri, founder of hundrd, a web studio in Bengaluru. Fintech, product and investing. Open to internships in finance, research and analytics.">
   <meta property="og:title" content="Abhinav Harisri">
   <meta property="og:description" content="Founder of hundrd, a web studio in Bengaluru. Open to internships in finance, research and analytics.">
   <meta property="og:image" content="https://abhinavharisri.github.io/assets/horizon.jpg">
@@ -62,6 +62,11 @@
       background: url("assets/horizon.jpg") 55% 42% / cover no-repeat;
       animation: drift 38s ease-in-out infinite alternate;
     }
+
+    /* time-of-day grade, set from Bengaluru time in the script */
+    .tint { position: absolute; inset: 0; }
+    .graded .tint { transition: background-color 4s ease; }
+    .graded .scene-img { transition: filter 4s ease; }
 
     .scene::after {
       content: '';
@@ -264,6 +269,26 @@
     .row-links a { color: var(--glow); opacity: .85; transition: opacity .2s; }
     .row-links a:hover { opacity: 1; }
 
+    .cv {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 12px 22px;
+      border: 1px solid rgba(255, 207, 138, 0.5);
+      border-radius: 999px;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      color: var(--glow);
+      transition: background .3s, color .3s;
+    }
+
+    .cv:hover { background: var(--glow); color: var(--night); }
+
+    .row.note .row-title { font-family: var(--serif); font-size: 24px; line-height: 1.2; }
+    .row.note .row-title i { font-family: var(--sans); font-style: normal; font-size: 12px; letter-spacing: 0.1em; color: var(--glow); display: inline-block; width: 34px; vertical-align: 4px; }
+    .row.note .row-meta { color: var(--ink-faint); }
+    .row.note .row-sub { padding-left: 34px; }
+    .row.note:hover .row-title { color: var(--glow); }
+
     a.row { transition: padding .4s cubic-bezier(.2, .7, .2, 1); }
     a.row:hover { padding-left: 10px; }
     a.row .row-meta { color: var(--glow); }
@@ -292,7 +317,7 @@
 </head>
 <body>
 
-  <div class="scene" id="scene" aria-hidden="true"><div class="scene-img"></div></div>
+  <div class="scene" id="scene" aria-hidden="true"><div class="scene-img" id="sceneImg"></div><div class="tint" id="tint"></div></div>
   <div class="grain" aria-hidden="true"></div>
 
   <main class="landing">
@@ -301,13 +326,13 @@
 
     <h1 class="line in d2">
       Building <a href="https://hundrd.studio" target="_blank" rel="noopener"><em>hundrd</em></a>.
-      <span class="sub">Equity Research <i>·</i> Risk Analysis <i>·</i> Investing</span>
+      <span class="sub">Fintech <i>·</i> Product <i>·</i> Investing</span>
     </h1>
 
     <nav class="horizon in d3">
       <a href="https://hundrd.studio" target="_blank" rel="noopener">hundrd ↗</a>
       <a href="#about">about</a>
-      <a href="#markets">markets</a>
+      <a href="#notes">notes</a>
       <a href="#contact">contact</a>
     </nav>
 
@@ -320,7 +345,7 @@
     <div class="panel-inner">
       <h2>About</h2>
       <p>I'm <strong>Abhinav</strong>. I run <a href="https://hundrd.studio" target="_blank" rel="noopener">hundrd</a>, a Bengaluru studio that designs, builds and hosts fast, secure websites for businesses that operate at scale, down to the hundredth detail.</p>
-      <p>The path here wasn't a straight line. I started out in cybersecurity, learning how systems break, then got pulled toward a different question: how money moves. Payments, risk, markets. That curiosity led to fundraising work at a sports-tech startup, finance work at a manufacturer, and a habit of tracking the market every month.</p>
+      <p>The path here wasn't a straight line. I started out in cybersecurity, learning how systems break, then got pulled toward a different question: how money moves. Payments, risk, markets. That curiosity led to fundraising work at a sports-tech startup, finance work at a manufacturer, and <a href="#notes">a growing pile of notes</a> on how payments actually work.</p>
       <p>Alongside the studio, I'm open to <strong>internships in finance, research and analytics</strong>.</p>
 
       <div class="rows">
@@ -331,40 +356,47 @@
         </div>
         <div class="row">
           <span class="row-title">Fundraising &amp; Partnerships, <a href="https://streetplay.ai/" target="_blank" rel="noopener">Streetplay.ai</a></span>
-          <span class="row-meta">2025</span>
+          <span class="row-meta">2025–26</span>
           <span class="row-sub">Sourced 20+ US investors in sports tech and AI, sharpened the pitch, and built partnerships with turfs and academies.</span>
         </div>
         <div class="row">
-          <span class="row-title">Finance &amp; Accounting, <a href="https://www.superiorelectric.in/" target="_blank" rel="noopener">Superior Electric Machines</a></span>
+          <span class="row-title">Accounting, <a href="https://www.superiorelectric.in/" target="_blank" rel="noopener">Superior Electric Machines</a></span>
           <span class="row-meta">2025</span>
-          <span class="row-sub">Monthly statements, balance sheets and P&amp;L for a manufacturing firm, plus audit readiness.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="panel" id="markets" aria-label="Markets">
-    <a href="#" class="back">← back</a>
-    <div class="panel-inner">
-      <h2>Markets</h2>
-      <p>Outside the studio, I study markets: what moves them, how risk gets priced, and where the patterns hide.</p>
-
-      <div class="rows">
-        <div class="row">
-          <span class="row-title">Stock tracker</span>
-          <span class="row-meta">June 2026</span>
-          <span class="row-sub">Buy, sell and hold calls on seven Indian and US companies, each backed by revenue, valuation and the macro picture.</span>
-          <span class="row-links"><a href="abhinavstocktrackerjune.pdf" target="_blank" rel="noopener">Read the tracker ↗</a></span>
+          <span class="row-sub">Profit &amp; loss statements and balance sheets for a manufacturing firm, plus audit readiness and cost management.</span>
         </div>
         <div class="row">
           <span class="row-title">RiskLens</span>
-          <span class="row-meta">Tool</span>
+          <span class="row-meta">Project</span>
           <span class="row-sub">A portfolio risk tool on live market data: volatility, value at risk, Sharpe ratio and correlation across Indian and US stocks.</span>
           <span class="row-links">
             <a href="https://stock-risk-analyzer-l02b.onrender.com" target="_blank" rel="noopener">Open ↗</a>
             <a href="https://github.com/abhinavharisri/stock-risk-analyzer" target="_blank" rel="noopener">Code ↗</a>
           </span>
         </div>
+        <div class="row">
+          <span class="row-title">B.Tech Cybersecurity, Presidency University</span>
+          <span class="row-meta">2027</span>
+        </div>
+      </div>
+
+      <a class="cv" href="assets/Abhinav-Harisri-CV.pdf" target="_blank" rel="noopener">Download CV ↗</a>
+    </div>
+  </section>
+
+  <section class="panel" id="notes" aria-label="Notes">
+    <a href="#" class="back">← back</a>
+    <div class="panel-inner">
+      <h2>Notes</h2>
+      <p>What I've been learning about how money moves in India: payments, the products built on them, and the decisions behind those products.</p>
+
+      <div class="rows">
+        <a class="row note" href="notes/upi-payment-flow.html"><span class="row-title"><i>01</i>How a UPI payment actually moves</span><span class="row-meta">3 min</span><span class="row-sub">Five parties, a few seconds, and why the app you tap is only the front door.</span></a>
+        <a class="row note" href="notes/p2p-vs-p2m.html"><span class="row-title"><i>02</i>P2P builds the habit. P2M pays the bills.</span><span class="row-meta">3 min</span><span class="row-sub">Two kinds of UPI payment, two very different jobs for the business.</span></a>
+        <a class="row note" href="notes/why-pending-feels-scary.html"><span class="row-title"><i>03</i>Why “Pending” feels so scary</span><span class="row-meta">4 min</span><span class="row-sub">Money gone from my account, not in theirs, and a single word on the screen.</span></a>
+        <a class="row note" href="notes/pending-screen-case-study.html"><span class="row-title"><i>04</i>Case study: fixing the pending screen</span><span class="row-meta">5 min</span><span class="row-sub">Two options, and why I'd ship the quieter one first.</span></a>
+        <a class="row note" href="notes/how-upi-apps-make-money.html"><span class="row-title"><i>05</i>How free UPI apps make money</span><span class="row-meta">3 min</span><span class="row-sub">Sending money costs users nothing. So who pays for all of it?</span></a>
+        <a class="row note" href="notes/reliability-is-the-feature.html"><span class="row-title"><i>06</i>Reliability is the feature</span><span class="row-meta">5 min</span><span class="row-sub">Fix the success rate before shipping anything new, and how I'd defend that to a CEO.</span></a>
+        <a class="row note" href="notes/what-gpay-gets-right.html"><span class="row-title"><i>07</i>What GPay gets right</span><span class="row-meta">2 min</span><span class="row-sub">Five small things on one home screen, and the lesson underneath them.</span></a>
       </div>
     </div>
   </section>
@@ -378,6 +410,7 @@
       <div class="rows">
         <a class="row" href="mailto:abhinavharisri@gmail.com"><span class="row-title">abhinavharisri@gmail.com</span><span class="row-meta">Email ↗</span></a>
         <a class="row" href="https://www.linkedin.com/in/abhinav-h-897152250/" target="_blank" rel="noopener"><span class="row-title">Abhinav Harisri</span><span class="row-meta">LinkedIn ↗</span></a>
+        <a class="row" href="assets/Abhinav-Harisri-CV.pdf" target="_blank" rel="noopener"><span class="row-title">Abhinav-Harisri-CV.pdf</span><span class="row-meta">CV ↗</span></a>
         <a class="row" href="https://hundrd.studio" target="_blank" rel="noopener"><span class="row-title">hundrd.studio</span><span class="row-meta">Studio ↗</span></a>
         <a class="row" href="https://github.com/abhinavharisri" target="_blank" rel="noopener"><span class="row-title">abhinavharisri</span><span class="row-meta">GitHub ↗</span></a>
       </div>
@@ -410,6 +443,39 @@
     function tick() { clock.textContent = 'Bengaluru, ' + fmt.format(new Date()).toLowerCase(); }
     tick();
     setInterval(tick, 15000);
+
+    // The photo follows Bengaluru's time of day. Preview any hour with ?t=21
+    // [hour, brightness, saturation, tint r, g, b, a]
+    const grades = [
+      [0,    .62, .85,  30,  45,  90, .32],
+      [5,    .70, .90,  60,  60, 110, .22],
+      [6.5,  .92, 1.0, 255, 170, 160, .10],
+      [9,   1.20, .92, 220, 235, 255, .06],
+      [16,  1.14, 1.0, 255, 200, 140, .04],
+      [18,  1.00, 1.18, 255, 150,  70, .12],
+      [19.5, .82, 1.0,  90,  70, 120, .18],
+      [21,   .68, .88,  30,  45,  90, .28],
+      [24,   .62, .85,  30,  45,  90, .32]
+    ];
+    const sceneImg = document.getElementById('sceneImg');
+    const tint = document.getElementById('tint');
+    const forced = parseFloat(new URLSearchParams(location.search).get('t'));
+    function grade() {
+      let h = forced;
+      if (isNaN(h)) {
+        const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+        h = +p.find(x => x.type === 'hour').value + p.find(x => x.type === 'minute').value / 60;
+      }
+      let i = 0;
+      while (h >= grades[i + 1][0]) i++;
+      const a = grades[i], b = grades[i + 1], k = (h - a[0]) / (b[0] - a[0]);
+      const v = a.map((x, j) => x + (b[j] - x) * k);
+      sceneImg.style.filter = `brightness(${v[1].toFixed(3)}) saturate(${v[2].toFixed(3)})`;
+      tint.style.backgroundColor = `rgba(${v[3] | 0}, ${v[4] | 0}, ${v[5] | 0}, ${v[6].toFixed(3)})`;
+    }
+    grade();
+    requestAnimationFrame(() => document.getElementById('scene').classList.add('graded'));
+    setInterval(grade, 60000);
 
     // Gentle parallax: the scene leans away from the cursor
     const scene = document.getElementById('scene');

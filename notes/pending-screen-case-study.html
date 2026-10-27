@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case study: fixing the pending screen · Abhinav Harisri</title>
+  <meta name="description" content="Reducing user anxiety during pending UPI transactions: the problem, two options, and why I'd ship the quieter one first.">
+  <meta property="og:title" content="Case study: fixing the pending screen">
+  <meta property="og:description" content="Reducing user anxiety during pending UPI transactions: the problem, two options, and why I'd ship the quieter one first.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://abhinavharisri.github.io/assets/horizon.jpg">
+  <meta property="og:url" content="https://abhinavharisri.github.io/notes/pending-screen-case-study.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/note.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <nav class="bar"><a href="../#notes">← notes</a><a href="../">Abhinav Harisri</a></nav>
+
+  <article>
+    <span class="kicker">Note 04 · Case study</span>
+    <h1>Fixing the <em>pending</em> screen</h1>
+    <p class="dek">Reducing user anxiety during pending UPI transactions: the problem, two options, and why I'd ship the quieter one first.</p>
+    <p class="meta">5 min read</p>
+
+    <dl class="cast">
+      <div><dt>Context</dt><dd>UPI users regularly hit pending transactions, which lead to panic, mistrust and support tickets.</dd></div>
+      <div><dt>Problem</dt><dd>Money is debited, confirmation is delayed, and the user is left alone with the word "Pending".</dd></div>
+      <div><dt>Insight</dt><dd>The stress doesn't come from waiting. It comes from fearing the money is lost, and not knowing what happens next.</dd></div>
+    </dl>
+
+    <h2>Two options on the table</h2>
+    <div class="versus">
+      <div><span class="tag">Feature A</span><b>A retry button</b>Let users try the payment again when it fails or hangs.</div>
+      <div class="pick"><span class="tag">Feature B · ship first</span><b>A better pending screen</b>Clear message, a timeline, and next steps, instead of one word.</div>
+    </div>
+
+    <h2>Why B goes first</h2>
+    <p>B is low-to-medium effort with high impact on trust. But the bigger reason is what A does when things go wrong.</p>
+    <p>If the sender's bank server is down and people keep pressing retry without knowing what's happening, every tap is another request. That piles load onto our own servers and slows the app down for <strong>everyone else</strong> too. A retry button on a pending screen can turn one bank's bad afternoon into an outage.</p>
+
+    <blockquote>The best fix for a scary state isn't a button to escape it. It's <em>telling people what's going on</em>.</blockquote>
+
+    <h2>What the new screen does</h2>
+    <ul>
+      <li><strong>Replaces "Pending" with a sentence</strong> that says what's happening, in plain language.</li>
+      <li><strong>Shows a timeline</strong>: when the money will arrive, or when it will come back if it doesn't.</li>
+      <li><strong>After a set time</strong> (I'd say 15 minutes), switches to next steps and a direct way to contact support.</li>
+      <li><strong>Adds delivery ticks</strong> to the payment in the receiver's history, like WhatsApp's sent and delivered ticks, so the sender can see the money actually landed.</li>
+    </ul>
+
+    <h2>How I'd measure it</h2>
+    <ol class="flow">
+      <li><strong>Fewer support tickets</strong>The first number to move, and the easiest to see.</li>
+      <li><strong>Fewer duplicate retries</strong>People who understand what's happening stop hammering the button.</li>
+      <li><strong>Lower uninstall rate</strong>One bad pending experience is a common reason people leave a payments app.</li>
+      <li><strong>Time in the app after a payment</strong>Calm users stick around. Panicked users close it.</li>
+    </ol>
+
+    <h2>Tradeoffs</h2>
+    <p>It isn't free. Accurate timelines and delivery ticks need more backend coordination to track real status, and the copy and design need real care, because a wrong promise is worse than no promise. Delaying the retry button also carries a risk: some users will want it. If support and instructions are good, that risk stays small.</p>
+
+    <h2>What I took from it</h2>
+    <p>The hardest part of choosing a feature is knowing whether it will actually matter: is it needed, does it change anything for the user, and what does it cost the team? Saying no to a feature is hard because you never know what you're giving up. But the risk has to be one the business can survive.</p>
+    <blockquote>Small, well-targeted changes can have a <em>large</em> impact on user trust.</blockquote>
+  </article>
+
+  <a class="next" href="how-upi-apps-make-money.html"><span>Next note</span><b>How free UPI apps make money</b></a>
+  <footer><span>© 2026 Abhinav Harisri</span><a href="../#contact">Say hello →</a></footer>
+</body>
+</html>

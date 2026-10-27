@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How a UPI payment actually moves · Abhinav Harisri</title>
+  <meta name="description" content="Five parties, a few seconds, and why the app you tap is only the front door.">
+  <meta property="og:title" content="How a UPI payment actually moves">
+  <meta property="og:description" content="Five parties, a few seconds, and why the app you tap is only the front door.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://abhinavharisri.github.io/assets/horizon.jpg">
+  <meta property="og:url" content="https://abhinavharisri.github.io/notes/upi-payment-flow.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/note.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <nav class="bar"><a href="../#notes">← notes</a><a href="../">Abhinav Harisri</a></nav>
+
+  <article>
+    <span class="kicker">Note 01 · Payments</span>
+    <h1>How a UPI payment actually <em>moves</em></h1>
+    <p class="dek">Five parties, a few seconds, and why the app you tap is only the front door.</p>
+    <p class="meta">3 min read</p>
+
+    <p>When I tap Pay in GPay, it feels like the app is moving my money. It isn't. The app is the only part I can see, but it does the smallest part of the job. Everything important happens between NPCI and two banks.</p>
+
+    <h2>The cast</h2>
+    <dl class="cast">
+      <div><dt>PSP app</dt><dd>GPay, PhonePe, Paytm. The interface. It collects what I type and forwards the request.</dd></div>
+      <div><dt>NPCI</dt><dd>The traffic controller. Every request goes through its APIs, which route money between banks.</dd></div>
+      <div><dt>Issuer bank</dt><dd>Where the money leaves. It checks my PIN and debits my account.</dd></div>
+      <div><dt>Beneficiary bank</dt><dd>Where the money lands. It credits the receiver.</dd></div>
+      <div><dt>VPA</dt><dd>The address, like name@bank. Nobody needs an account number or IFSC code.</dd></div>
+      <div><dt>UPI PIN</dt><dd>The authentication. Proof that it's really me.</dd></div>
+    </dl>
+    <p>Unlike a wallet, nothing has to be loaded in first. UPI pulls straight from the bank account, in real time.</p>
+
+    <blockquote>NPCI is the traffic controller, banks hold the money, and the app is just the <em>window</em> you look through.</blockquote>
+
+    <h2>The flow, step by step</h2>
+    <ol class="flow">
+      <li><strong>The app collects</strong>Receiver's UPI ID or number, the amount, and my PIN. Then it forwards the request.</li>
+      <li><strong>NPCI routes</strong>It works out which banks are involved and passes the request along.</li>
+      <li><strong>Issuer bank debits</strong>My bank authorises the payment and takes the money out.</li>
+      <li><strong>Beneficiary bank credits</strong>The receiver's bank puts the money in.</li>
+      <li><strong>Confirmation travels back</strong>Only when the banks confirm through NPCI does my app show success.</li>
+    </ol>
+    <p>That last step is the interesting one. If a bank is slow to confirm, the app has nothing to show except "Processing". That gap gets <a href="why-pending-feels-scary.html">its own note</a>.</p>
+
+    <h2>Where cards fit in</h2>
+    <p>Card payments run on different pipes, with a few more pieces in the middle:</p>
+    <ul>
+      <li><strong>Payment gateway</strong> (Razorpay, Stripe, PayPal) connects the merchant to the networks and banks, and moves payment data securely.</li>
+      <li><strong>Card network</strong> (Visa, Mastercard) carries the request to the bank that issued the card, which approves or declines it.</li>
+      <li><strong>Encryption</strong> keeps card details unreadable while they travel.</li>
+      <li><strong>Tokenisation</strong> replaces the card number with a token, so the merchant can charge you again without ever storing your real card.</li>
+    </ul>
+  </article>
+
+  <a class="next" href="p2p-vs-p2m.html"><span>Next note</span><b>P2P builds the habit. P2M pays the bills.</b></a>
+  <footer><span>© 2026 Abhinav Harisri</span><a href="../#contact">Say hello →</a></footer>
+</body>
+</html>
