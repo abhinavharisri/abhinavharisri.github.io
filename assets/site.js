@@ -57,71 +57,62 @@
     });
   });
 
-  // The homepage mark: 400 pixels that turn in 3D and reshape AH -> hundrd -> sphere.
-  // The 4 pixels that make hundrd's 100th square stay signal orange in every shape.
+  // The homepage mark: the hundrd pixel cube, six faces of 10x10 pixels, spinning in 3D.
+  // Every few seconds it inflates into a sphere (each pixel pushed out from the centre)
+  // and back. Front face's 100th pixel stays signal orange, like the hundrd logo.
   function morph(button) {
     var canvas = button.querySelector('canvas');
-    var N = 400, SIGNAL_FROM = 396, SIZE = 120;
+    var SIZE = 120, H = 26, R = 40, PITCH = 2 * H / 10;
 
-    // hundrd mark: 10x10 grid, 6-unit pixels on a 10-unit pitch, each pixel a 2x2 of points
-    function hundrd() {
-      var pts = [], s = 0.72;
-      for (var row = 0; row < 10; row++) for (var col = 0; col < 10; col++)
-        for (var k = 0; k < 4; k++) {
-          var x = col * 10 + 1.5 + (k % 2) * 3, y = row * 10 + 1.5 + Math.floor(k / 2) * 3;
-          pts.push([(x - 48) * s, (y - 48) * s, 0]);
-        }
-      return pts;
-    }
-
-    function fromText(txt, font) {
-      var off = document.createElement('canvas');
-      off.width = off.height = 100;
-      var o = off.getContext('2d');
-      o.font = font; o.textAlign = 'center'; o.textBaseline = 'middle';
-      o.fillText(txt, 50, 54);
-      var data = o.getImageData(0, 0, 100, 100).data, filled = [];
-      for (var y = 0; y < 100; y += 2) for (var x = 0; x < 100; x += 2)
-        if (data[(y * 100 + x) * 4 + 3] > 128) filled.push([x - 50, y - 50]);
-      var pts = [];
-      for (var i = 0; i < N; i++) {
-        var p = filled[Math.floor(i * filled.length / N)];
-        pts.push([p[0] * 0.9, p[1] * 0.9, (Math.random() - 0.5) * 8]);
+    // the six faces: [axis that is fixed, its sign]; u/v walk the other two axes
+    var cube = [], faceNormal = [], signal = 99;   // front face comes first, so pixel 99 is its bottom-right one
+    [[2, 1], [2, -1], [0, 1], [0, -1], [1, 1], [1, -1]].forEach(function (f) {
+      var a = f[0], u = (a + 1) % 3, v = (a + 2) % 3, n = [0, 0, 0];
+      n[a] = f[1];
+      for (var row = 0; row < 10; row++) for (var col = 0; col < 10; col++) {
+        var p = [0, 0, 0];
+        p[a] = H * f[1];
+        p[u] = -H + PITCH * (col + 0.5);
+        p[v] = -H + PITCH * (row + 0.5);
+        cube.push(p);
+        faceNormal.push(n);
       }
-      return pts;
-    }
+    });
 
-    function sphere(r) {
-      var pts = [], g = Math.PI * (3 - Math.sqrt(5));
-      for (var i = 0; i < N; i++) {
-        var y = 1 - (i / (N - 1)) * 2, rad = Math.sqrt(1 - y * y), t = g * i;
-        pts.push([Math.cos(t) * rad * r, y * r, Math.sin(t) * rad * r]);
-      }
-      return pts;
-    }
+    var ball = cube.map(function (p) {
+      var len = Math.hypot(p[0], p[1], p[2]);
+      return [p[0] / len * R, p[1] / len * R, p[2] / len * R];
+    });
 
-    var shapes = [fromText('AH', '700 46px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif'), hundrd(), sphere(38)];
+    var shapes = [cube, ball];
     var dpr = window.devicePixelRatio || 1;
     canvas.width = canvas.height = SIZE * dpr;
     var ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
 
-    var cur = shapes[0].map(function (p) { return p.slice(); }), shape = 0, t = 0, timer;
+    var cur = cube.map(function (p) { return p.slice(); }), shape = 0, mix = 0, t = 0.6, timer;
 
     function draw() {
-      var cs = getComputedStyle(root), ink = cs.getPropertyValue('--ink').trim(), signal = cs.getPropertyValue('--signal').trim();
-      var ry = Math.sin(t) * 0.9, rx = -0.15, cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(rx), sx = Math.sin(rx);
+      var cs = getComputedStyle(root), ink = cs.getPropertyValue('--ink').trim(), orange = cs.getPropertyValue('--signal').trim();
+      var ry = t, rx = -0.5 + Math.sin(t * 0.7) * 0.12;
+      var cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(rx), sx = Math.sin(rx);
+      function turn(p) {
+        var x = p[0] * cy + p[2] * sy, z = -p[0] * sy + p[2] * cy;
+        return [x, p[1] * cx - z * sx, p[1] * sx + z * cx];
+      }
       var out = cur.map(function (p, i) {
-        var x = p[0] * cy - p[2] * sy, z = p[0] * sy + p[2] * cy;
-        var y = p[1] * cx - z * sx; z = p[1] * sx + z * cx;
-        return [x, y, z, i >= SIGNAL_FROM];
+        // light each pixel by how much its surface faces the viewer: face normal on the cube, radial on the sphere
+        var b = ball[i], f = faceNormal[i];
+        var n = turn([f[0] + (b[0] / R - f[0]) * mix, f[1] + (b[1] / R - f[1]) * mix, f[2] + (b[2] / R - f[2]) * mix]);
+        var q = turn(p);
+        return [q[0], q[1], q[2], i === signal, n[2] / (Math.hypot(n[0], n[1], n[2]) || 1)];
       }).sort(function (a, b) { return a[2] - b[2]; });
       ctx.clearRect(0, 0, SIZE, SIZE);
       out.forEach(function (p) {
-        var k = 220 / (220 - p[2]), depth = Math.max(0, Math.min(1, (p[2] + 45) / 90));
-        var side = 2.35 * k * (0.7 + depth * 0.6);
-        ctx.globalAlpha = p[3] ? 1 : Math.min(1, 0.45 + depth * 0.9);
-        ctx.fillStyle = p[3] ? signal : ink;
+        var k = 220 / (220 - p[2]), facing = p[4];
+        var side = 2.9 * k;
+        ctx.globalAlpha = p[3] ? 1 : facing > 0 ? 0.3 + facing * 0.7 : 0.07;
+        ctx.fillStyle = p[3] ? orange : ink;
         ctx.fillRect(60 + p[0] * k - side / 2, 60 + p[1] * k - side / 2, side, side);
       });
       ctx.globalAlpha = 1;
@@ -134,18 +125,19 @@
     }
 
     function next() {
-      shape = (shape + 1) % shapes.length;
+      shape = 1 - shape;
       clearTimeout(timer);
-      timer = setTimeout(next, 3800);
+      timer = setTimeout(next, shape ? 2600 : 4200);
     }
     button.addEventListener('click', next);
-    timer = setTimeout(next, 3800);
+    timer = setTimeout(next, 4200);
 
     (function loop() {
-      t += 0.012;
+      t += 0.008;
+      mix += (shape - mix) * 0.05;
       var target = shapes[shape];
-      for (var i = 0; i < N; i++) for (var k = 0; k < 3; k++)
-        cur[i][k] += (target[i][k] - cur[i][k]) * (0.06 + (i % 7) * 0.006);
+      for (var i = 0; i < cur.length; i++) for (var k = 0; k < 3; k++)
+        cur[i][k] += (target[i][k] - cur[i][k]) * (0.05 + (i % 9) * 0.004);
       draw();
       requestAnimationFrame(loop);
     })();
